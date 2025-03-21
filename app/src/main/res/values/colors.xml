@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- ตั้งค่าสีที่ต้องการใช้งานที่นี่ -->
+    <color name="js_yellow">#F7DF1E</color> <!-- สีเหลือง JavaScript -->
+    <color name="js_yellow_dark">#C4AD14</color> <!-- เหลืองเข้ม -->
+    <color name="black">#121212</color> <!-- สีดำสนิท -->
+    <color name="white">#FFFFFF</color>
+</resources>

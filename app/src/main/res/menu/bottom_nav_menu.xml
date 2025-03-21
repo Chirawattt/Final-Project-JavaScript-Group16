@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_home"
+        android:icon="@android:drawable/ic_menu_compass"
+        android:title="Home"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/nav_lesson"
+        android:icon="@android:drawable/ic_menu_info_details"
+        android:title="Lesson"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/nav_quiz"
+        android:icon="@android:drawable/ic_menu_edit"
+        android:title="Quiz"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/nav_practice"
+        android:icon="@android:drawable/ic_menu_manage"
+        android:title="Practice"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/nav_team"
+        android:icon="@android:drawable/ic_menu_my_calendar"
+        android:title="Team"
+        app:showAsAction="ifRoom" />
+</menu>

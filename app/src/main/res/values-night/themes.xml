@@ -1,0 +1,22 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.FinalProjectJavaScriptGroup16" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- สีพื้นฐาน -->
+        <item name="colorPrimary">@color/js_yellow</item>
+        <item name="colorPrimaryVariant">@color/js_yellow_dark</item>
+        <item name="colorOnPrimary">@color/black</item>
+
+        <!-- สีพื้นหลัง -->
+        <item name="android:windowBackground">@color/black</item>
+        <item name="android:colorBackground">@color/black</item>
+        <item name="colorOnBackground">@color/js_yellow</item>
+
+        <!-- Toolbar & Navigation -->
+        <item name="android:navigationBarColor">@color/black</item>
+        <item name="android:statusBarColor">@color/black</item>
+
+        <!-- ใช้ Edge-to-Edge UI -->
+        <item name="android:windowLightNavigationBar">false</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+</resources>

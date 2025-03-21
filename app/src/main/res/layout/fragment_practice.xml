@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".PracticeFragment" >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="@font/sarabun_bold"
+        android:text="ทดลองเขียนโค้ด JavaScript"
+        android:textColor="@color/js_yellow"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/code_input"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@color/white"
+        android:fontFamily="@font/sarabun"
+        android:hint="พิมพ์โค้ดที่นี่..."
+        android:textColor="@color/black" />
+
+    <Button
+        android:id="@+id/run_code"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="@color/js_yellow"
+        android:fontFamily="@font/sarabun_bold"
+        android:text="Run"
+        android:textColor="@color/black" />
+</LinearLayout>
