@@ -4,27 +4,27 @@
 
     <item
         android:id="@+id/nav_home"
-        android:icon="@android:drawable/ic_menu_compass"
+        android:icon="@drawable/house"
         android:title="Home"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/nav_lesson"
-        android:icon="@android:drawable/ic_menu_info_details"
+        android:icon="@drawable/book_text"
         android:title="Lesson"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/nav_quiz"
-        android:icon="@android:drawable/ic_menu_edit"
+        android:icon="@drawable/notebook_pen"
         android:title="Quiz"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/nav_practice"
-        android:icon="@android:drawable/ic_menu_manage"
+        android:icon="@drawable/square_dashed_bottom_code"
         android:title="Practice"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/nav_team"
-        android:icon="@android:drawable/ic_menu_my_calendar"
+        android:icon="@drawable/users"
         android:title="Team"
         app:showAsAction="ifRoom" />
 </menu>
