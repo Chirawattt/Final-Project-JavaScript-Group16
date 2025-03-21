@@ -3,7 +3,10 @@
     android:id="@+id/lesson_text"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@android:color/transparent"
-    android:padding="10dp"
-    android:textColor="@color/white"
-    android:textSize="18sp" />
+    android:layout_marginBottom="10dp"
+    android:background="@drawable/rounded_textview"
+    android:drawableRight="@drawable/chevron_right"
+    android:fontFamily="@font/sarabun"
+    android:textColor="#191919"
+    android:textSize="16sp"
+    android:textStyle="bold" />
