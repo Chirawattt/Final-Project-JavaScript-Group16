@@ -1,49 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/lesson_scroll_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
-    android:padding="16dp">
+    android:background="@color/black">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="16dp">
 
         <!-- Title (บทที่ ...) -->
         <TextView
             android:id="@+id/lesson_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/sarabun_bold"
+            android:fontFamily="@font/sarabun"
             android:textColor="@color/js_yellow"
             android:textSize="32sp"
             android:textStyle="bold" />
 
         <!-- Divider -->
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_marginBottom="10dp"
-            android:background="@color/js_yellow_dark" />
 
         <!-- Introduction -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/sarabun_bold"
-            android:text="คำอธิบายเกี่ยวกับบทเรียนนี้: "
-            android:textColor="@color/js_yellow_dark"
-            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/lesson_intro"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
+            android:background="@drawable/lesson_content"
             android:fontFamily="@font/sarabun"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="5dp"
             android:textColor="@android:color/white"
             android:textSize="18sp" />
 
@@ -55,13 +46,6 @@
             android:background="@color/js_yellow_dark" />
 
         <!-- Lesson Content -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/sarabun_bold"
-            android:text="เนื้อหา: "
-            android:textColor="@color/js_yellow_dark"
-            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/lesson_content"
@@ -97,7 +81,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/sarabun_bold"
-                android:text="🔹 Input:"
+                android:text="Input:"
                 android:textColor="@color/js_yellow"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -106,10 +90,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:fontFamily="@font/sarabun_bold"
-                android:text="(สามารถเลื่อนดูตัวอย่างอื่นได้ →)"
+                android:fontFamily="@font/sarabun"
+                android:text="(สามารถเลื่อนดูตัวอย่างเพิ่มเติมได้ →)"
                 android:textAlignment="center"
-                android:textColor="@color/js_yellow_dark"
+                android:textColor="#59FFFFFF"
                 android:textSize="16sp" />
 
         </LinearLayout>
@@ -134,7 +118,7 @@
             android:id="@+id/code_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#CACACA"
+            android:background="@drawable/input_lesson"
             android:cursorVisible="false"
             android:focusable="false"
             android:fontFamily="@font/sarabun"
@@ -142,8 +126,8 @@
             android:hint="เลือกตัวอย่างคำสั่งได้ตรงด้านบน ↑↑"
             android:inputType="none"
             android:padding="10dp"
-            android:textColor="@color/black"
-            android:textColorHint="#424242"
+            android:textColor="@color/white"
+            android:textColorHint="#545454"
             android:textSize="14sp" />
 
         <!-- ปุ่ม Run Code -->
@@ -153,8 +137,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:backgroundTint="@color/js_yellow"
+            android:drawableLeft="@drawable/play"
             android:fontFamily="@font/sarabun_bold"
-            android:text="↪ Run Code"
+            android:paddingLeft="18dp"
+            android:text="Run Code"
             android:textColor="@color/black" />
 
         <!-- Output -->
@@ -163,7 +149,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:fontFamily="@font/sarabun_bold"
-            android:text="🔹 Output:"
+            android:text="Output:"
             android:textColor="@color/js_yellow"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -173,13 +159,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
-            android:background="#474747"
+            android:background="@drawable/output_lesson"
             android:fontFamily="@font/sarabun_bold"
             android:hint="(ผลลัพธ์จะแสดงที่นี่)"
             android:minHeight="50dp"
             android:padding="10dp"
-            android:textColor="@android:color/white"
-            android:textColorHint="#B1B1B1"
+            android:textColor="@color/black"
+            android:textColorHint="#888888"
             android:textSize="16sp" />
 
         <!-- Divider -->
@@ -203,7 +189,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="10dp"
                 android:backgroundTint="@color/js_yellow_dark"
-                android:text="◀ Previous"
+                android:drawableLeft="@drawable/chevron_left"
+                android:fontFamily="@font/sarabun"
+                android:paddingLeft="12dp"
+                android:text="บทก่อนหน้า"
                 android:textColor="@color/black"
                 android:visibility="gone" />
 
@@ -212,7 +201,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/js_yellow"
-                android:text="Next ▶"
+                android:drawableRight="@drawable/chevron_right"
+                android:fontFamily="@font/sarabun"
+                android:insetRight="1dp"
+                android:paddingRight="12dp"
+                android:text="บทถัดไป"
                 android:textColor="@color/black" />
         </LinearLayout>
 
@@ -222,8 +215,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:backgroundTint="@color/js_yellow"
+            android:drawableLeft="@drawable/undo_2"
             android:fontFamily="@font/sarabun_bold"
-            android:text="▼ กลับไปหน้าหลัก"
+            android:paddingLeft="16dp"
+            android:text="กลับไปหน้าหลัก"
             android:textColor="@color/black" />
 
     </LinearLayout>

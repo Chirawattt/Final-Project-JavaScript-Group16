@@ -122,7 +122,7 @@ public class LessonDetailActivity extends AppCompatActivity implements View.OnCl
 
                     final int index = i;
                     exampleButton.setOnClickListener(v -> {
-                        codeInput.setText(exampleCodes[index]); // ใส่โค้ดในช่อง Input
+                        codeInput.setText(Html.fromHtml(exampleCodes[index])); // ใส่โค้ดในช่อง Input
                         selectedExampleIndex = index; // บันทึกตัวอย่างที่เลือก
                     });
 
