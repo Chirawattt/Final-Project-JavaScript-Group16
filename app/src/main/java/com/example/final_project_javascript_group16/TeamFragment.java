@@ -15,7 +15,7 @@ public class TeamFragment extends Fragment {
 
     private String[] teamMembers = {
             "[หัวหน้ากลุ่ม | Developer]\n  1. 6506021611017 นาย จีรวัฒน์ ญานะ",
-            "[UI Designer]\n  2. 6506021611076 นาย นฤนาท คามวารี 1",
+            "[UI Designer]\n  2. 6506021611076 นาย นฤนาท คามวารี",
             "[จัดทำเอกสาร]\n  3. 6506021611068 นาย ธนพนธ์ แจ้งสนธิ์ ",
             "[สีบค้นข้อมูล JavaScript]\n  4. 6506021621080 นาย ปรินทร สุทธิคุณ ",
     };
