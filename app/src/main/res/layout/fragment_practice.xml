@@ -1,38 +1,205 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@android:color/black"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp"
-    tools:context=".PracticeFragment" >
+    android:padding="16dp">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:fontFamily="@font/sarabun_bold"
-        android:text="ทดลองเขียนโค้ด JavaScript"
-        android:textColor="@color/js_yellow"
-        android:textSize="20sp"
-        android:textStyle="bold" />
-
-    <EditText
-        android:id="@+id/code_input"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:background="@color/white"
-        android:fontFamily="@font/sarabun"
-        android:hint="พิมพ์โค้ดที่นี่..."
-        android:textColor="@color/black" />
+        android:layout_height="wrap_content">
 
-    <Button
-        android:id="@+id/run_code"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:backgroundTint="@color/js_yellow"
-        android:fontFamily="@font/sarabun_bold"
-        android:text="Run"
-        android:textColor="@color/black" />
-</LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="16dp"
+            android:fontFamily="@font/sarabun_bold"
+            android:text="💻 โหมดฝึกฝน"
+            android:textColor="@color/js_yellow"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <!-- หัวข้อบท + ระดับความยาก -->
+        <TextView
+            android:id="@+id/practice_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="บทที่ 1: ชนิดข้อมูล (ระดับ: ง่าย)"
+            android:textColor="@android:color/white"
+            android:fontFamily="@font/sarabun_bold"
+            android:textSize="18sp"
+            android:layout_marginBottom="12dp" />
+
+        <LinearLayout
+            android:id="@+id/difficulty_selector"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginBottom="16dp">
+
+            <Button
+                android:id="@+id/btn_easy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ง่าย"
+                android:layout_marginEnd="8dp"
+                android:fontFamily="@font/sarabun_bold"
+                android:backgroundTint="@color/js_yellow_dark"
+                android:textColor="@android:color/black"/>
+
+            <Button
+                android:id="@+id/btn_medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ปานกลาง"
+                android:layout_marginEnd="8dp"
+                android:fontFamily="@font/sarabun_bold"
+                android:backgroundTint="@color/js_yellow"
+                android:textColor="@android:color/black"/>
+
+            <Button
+                android:id="@+id/btn_hard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ยาก"
+                android:fontFamily="@font/sarabun_bold"
+                android:backgroundTint="@color/js_yellow"
+                android:textColor="@android:color/black"/>
+        </LinearLayout>
+
+
+        <!-- โจทย์ -->
+        <TextView
+            android:id="@+id/practice_question"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="📝 จงประกาศตัวแปรชื่อ age และกำหนดค่าเป็น 25"
+            android:textColor="@android:color/white"
+            android:fontFamily="@font/sarabun"
+            android:textSize="16sp"
+            android:layout_marginBottom="16dp" />
+
+        <!-- พื้นที่เขียนโค้ด -->
+        <EditText
+            android:id="@+id/practice_code_input"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:background="@android:color/white"
+            android:inputType="textMultiLine"
+            android:gravity="top"
+            android:textColor="@android:color/black"
+            android:padding="12dp"
+            android:textSize="14sp"
+            android:fontFamily="@font/sarabun"
+            android:hint="พิมพ์โค้ดของคุณที่นี่..." />
+
+        <!-- ปุ่ม Run/ตรวจคำตอบ -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="16dp">
+
+            <Button
+                android:id="@+id/btn_run_code"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Run Code"
+                android:backgroundTint="@color/js_yellow"
+                android:textColor="@android:color/black"
+                android:fontFamily="@font/sarabun_bold"
+                android:layout_marginEnd="12dp"/>
+
+            <Button
+                android:id="@+id/btn_check"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ตรวจคำตอบ"
+                android:backgroundTint="@color/js_yellow_dark"
+                android:textColor="@android:color/black"
+                android:fontFamily="@font/sarabun_bold"/>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_show_solution"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ดูเฉลย"
+            android:layout_marginTop="12dp"
+            android:fontFamily="@font/sarabun_bold"
+            android:backgroundTint="@color/js_yellow_dark"
+            android:textColor="@android:color/black"
+            android:visibility="gone"/>
+
+        <!-- Output -->
+        <TextView
+            android:id="@+id/practice_output"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:minHeight="60dp"
+            android:background="#333333"
+            android:text="ผลลัพธ์จะแสดงที่นี่"
+            android:textColor="@android:color/white"
+            android:fontFamily="@font/sarabun"
+            android:padding="12dp"
+            android:textSize="15sp" />
+
+
+        <WebView
+            android:id="@+id/webview_runner"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:id="@+id/navigation_buttons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="16dp"
+            android:visibility="gone">
+
+            <Button
+                android:id="@+id/btn_prev_lesson"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="บทก่อนหน้า"
+                android:layout_marginEnd="8dp"
+                android:fontFamily="@font/sarabun_bold"
+                android:backgroundTint="@color/js_yellow_dark"
+                android:textColor="@android:color/black"/>
+
+            <Button
+                android:id="@+id/btn_next_lesson"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="บทถัดไป"
+                android:fontFamily="@font/sarabun_bold"
+                android:backgroundTint="@color/js_yellow"
+                android:textColor="@android:color/black"/>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_reset_practice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="รีเซ็ตความคืบหน้า"
+            android:layout_marginTop="24dp"
+            android:fontFamily="@font/sarabun_bold"
+            android:backgroundTint="@color/js_yellow_dark"
+            android:textColor="@android:color/black" />
+
+
+
+    </LinearLayout>
+
+
+</ScrollView>

@@ -1,54 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp"
-    tools:context=".QuizFragment" >
+    android:padding="16dp">
 
-    <TextView
-        android:id="@+id/question_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:fontFamily="@font/sarabun_bold"
-        android:text="คำถามที่ 1:"
-        android:textColor="@color/js_yellow"
-        android:textSize="20sp"
-        android:textStyle="bold" />
-
-    <RadioGroup
-        android:id="@+id/quiz_options"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-
-        <RadioButton
-            android:id="@+id/option_1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/sarabun_bold"
-            android:text="Option 1"
-            android:textColor="@color/white" />
-
-        <RadioButton
-            android:id="@+id/option_2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/sarabun_bold"
-            android:text="Option 2"
-            android:textColor="@color/white" />
-    </RadioGroup>
-
-    <Button
-        android:id="@+id/submit_quiz"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        android:fontFamily="@font/sarabun_bold"
-        android:paddingHorizontal="100dp"
-        android:text="ส่งคำตอบ"
-        android:textSize="20sp"
-        android:textStyle="bold" />
-</LinearLayout>
+        android:divider="?android:attr/dividerHorizontal"
+        android:dividerPadding="8dp"
+        android:orientation="vertical"
+        android:showDividers="middle">
+
+        <TextView
+            android:id="@+id/quiz_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="16dp"
+            android:fontFamily="@font/sarabun_bold"
+            android:text="📚 แบบทดสอบ JavaScript"
+            android:textColor="@color/js_yellow"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/overall_progress_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ความคืบหน้า: 0 / 5 บท"
+            android:textColor="@android:color/white"
+            android:fontFamily="@font/sarabun_bold"
+            android:textSize="16sp"
+            android:layout_marginBottom="8dp" />
+
+        <ProgressBar
+            android:id="@+id/overall_progress_bar"
+            android:layout_width="match_parent"
+            android:layout_height="12dp"
+            android:progress="0"
+            android:max="5"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:progressTint="@color/js_yellow"
+            android:backgroundTint="#444"
+            android:layout_marginBottom="16dp" />
+
+        <LinearLayout
+            android:id="@+id/quizLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"></LinearLayout>
+
+        <Button
+            android:id="@+id/reset_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="รีเซตคะแนนทั้งหมด"
+            android:backgroundTint="@color/js_yellow_dark"
+            android:textColor="@color/black"
+            android:fontFamily="@font/sarabun_bold"
+            android:layout_marginTop="16dp"/>
+
+    </LinearLayout>
+</ScrollView>
+

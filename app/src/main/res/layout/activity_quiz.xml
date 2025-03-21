@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/quiz_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    android:orientation="vertical"
+    android:padding="24dp">
+
+    <!-- Progress Bar -->
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="8dp"
+        android:layout_marginBottom="16dp"
+        android:max="100"
+        android:progress="0" />
+
+    <!-- ข้อที่ X / 10 -->
+    <TextView
+        android:id="@+id/question_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ข้อที่ 1 / 10"
+        android:textColor="@color/js_yellow"
+        android:textSize="18sp"
+        android:fontFamily="@font/sarabun_bold"
+        android:layout_marginBottom="4dp" />
+
+    <!-- ชื่อบท -->
+    <TextView
+        android:id="@+id/lesson_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="บทที่ 3: ตัวดำเนินการ"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        android:fontFamily="@font/sarabun_bold"
+        android:layout_marginBottom="16dp" />
+
+    <!-- คำถาม -->
+    <TextView
+        android:id="@+id/question_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="JavaScript เป็นภาษาแบบ...?"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        android:fontFamily="@font/sarabun_bold"
+        android:layout_marginBottom="24dp" />
+
+    <!-- ตัวเลือก -->
+    <RadioGroup
+        android:id="@+id/option_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="24dp">
+
+        <RadioButton
+            android:id="@+id/option_a"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="A. ภาษาเชิงวัตถุ"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:fontFamily="@font/sarabun"
+            android:buttonTint="@color/js_yellow" />
+
+        <RadioButton
+            android:id="@+id/option_b"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="B. ภาษาเชิงโครงสร้าง"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:fontFamily="@font/sarabun"
+            android:buttonTint="@color/js_yellow" />
+
+        <RadioButton
+            android:id="@+id/option_c"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="C. ภาษาเชิงฟังก์ชัน"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:fontFamily="@font/sarabun"
+            android:buttonTint="@color/js_yellow" />
+
+        <RadioButton
+            android:id="@+id/option_d"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="D. ภาษาสคริปต์"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:fontFamily="@font/sarabun"
+            android:buttonTint="@color/js_yellow" />
+    </RadioGroup>
+
+    <!-- ปุ่มถัดไป -->
+    <Button
+        android:id="@+id/next_question_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ถัดไป"
+        android:backgroundTint="@color/js_yellow_dark"
+        android:textColor="@color/black"
+        android:fontFamily="@font/sarabun_bold"
+        android:visibility="gone"/>
+</LinearLayout>
+
