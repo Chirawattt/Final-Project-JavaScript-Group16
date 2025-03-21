@@ -3,6 +3,6 @@
     <!-- ตั้งค่าสีที่ต้องการใช้งานที่นี่ -->
     <color name="js_yellow">#F7DF1E</color> <!-- สีเหลือง JavaScript -->
     <color name="js_yellow_dark">#C4AD14</color> <!-- เหลืองเข้ม -->
-    <color name="black">#121212</color> <!-- สีดำสนิท -->
+    <color name="black">#191919</color> <!-- สีดำสนิท -->
     <color name="white">#FFFFFF</color>
 </resources>
