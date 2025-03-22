@@ -24,8 +24,9 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-//        SharedPreferences prefs = getContext().getSharedPreferences("lesson_progress", Context.MODE_PRIVATE);
-//        prefs.edit().clear().apply(); // 🔁 เคลียร์ทุกบท
+        SharedPreferences prefs = getContext().getSharedPreferences("lesson_progress", Context.MODE_PRIVATE);
+        prefs.edit().clear().apply(); // 🔁 เคลียร์ทุกบท
+        prefs.edit().remove("all_lessons_complete_toast_shown").apply();
 
         // ปุ่มต่าง ๆ
         Button btnLesson = view.findViewById(R.id.btn_lesson);

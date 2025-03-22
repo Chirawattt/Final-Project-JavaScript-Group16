@@ -70,7 +70,10 @@ public class LessonDetailActivity extends AppCompatActivity implements View.OnCl
         } else if (id == R.id.next_button) {
             if (currentLesson < lessonLength) {
                 SharedPreferences prefs = getSharedPreferences("lesson_progress", MODE_PRIVATE);
-                prefs.edit().putBoolean("lesson_read_" + currentLesson, true).apply();
+                prefs.edit()
+                        .putBoolean("ref_lesson_" + (currentLesson + 1), true)
+                        .putBoolean("lesson_read_" + currentLesson, true)
+                        .apply();
                 currentLesson++;
                 updateLesson(currentLesson);
 

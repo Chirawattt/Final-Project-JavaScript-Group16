@@ -191,14 +191,35 @@ public class QuizFragment extends Fragment {
 
     private void showFeedbackForLesson(int lesson, int score) {
         if (score >= 8) {
-            showCustomToast("🎉 ยินดีด้วย! คุณทำได้ดีมาก\nระบบเปิดบทถัดไปให้แล้ว",
-                    R.drawable.toast_background_sccess, R.drawable.ic_check_circle, R.raw.levelup, "celebration2.json");
+            CustomToastUtil.show(
+                    requireContext(),
+                    requireActivity(),
+                    "🎉 ยินดีด้วย! คุณทำได้ดีมาก\nระบบเปิดบทถัดไปให้แล้ว",
+                    R.drawable.toast_background_sccess,
+                    R.drawable.ic_check_circle,
+                    R.raw.levelup,
+                    "celebration2.json"
+            );
         } else if (score >= 5) {
-            showCustomToast("😊 ผ่านแล้ว! ทำได้ไม่เลว\nระบบเปิดบทถัดไปให้แล้ว",
-                    R.drawable.toast_background_medium, R.drawable.ic_passed, R.raw.correct_sound, null);
+            CustomToastUtil.show(
+                    requireContext(),
+                    requireActivity(),
+                    "😊 ผ่านแล้ว! ทำได้ไม่เลว\nระบบเปิดบทถัดไปให้แล้ว",
+                    R.drawable.toast_background_medium,
+                    R.drawable.ic_passed,
+                    R.raw.correct_sound,
+                    null
+            );
         } else {
-            showCustomToast("😅 เกือบผ่านแล้ว! พยายามอีกนิดนึงนะ\nต้องได้ 5 คะแนนขึ้นไป\nถึงจะสามารถไปบทต่อไปได้ สู้ๆ!",
-                    R.drawable.toast_background_fail, R.drawable.ic_warning, R.raw.cheerup, "cheerup.json");
+            CustomToastUtil.show(
+                    requireContext(),
+                    requireActivity(),
+                    "😅 เกือบผ่านแล้ว! พยายามอีกนิดนึงนะ\nต้องได้ 5 คะแนนขึ้นไป\nถึงจะสามารถไปบทต่อไปได้ สู้ๆ!",
+                    R.drawable.toast_background_fail,
+                    R.drawable.ic_warning,
+                    R.raw.cheerup,
+                    "cheerup.json"
+            );
         }
     }
 

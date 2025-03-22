@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,6 +44,19 @@ public class LessonFragment extends Fragment {
         LayoutAnimationController animation = AnimationUtils.loadLayoutAnimation(context, R.anim.layout_animation_slide_up);
         lessonListView.setLayoutAnimation(animation);
         lessonListView.scheduleLayoutAnimation();
+
+        if (isAllLessonsCompleted() && !alreadyShownCompleteToast()) {
+            CustomToastUtil.show(
+                    requireContext(),
+                    requireActivity(),
+                    "🎉 ยินดีด้วย! คุณเรียนครบทุกบทแล้ว",
+                    R.drawable.toast_background_sccess,
+                    R.drawable.ic_check_circle,
+                    R.raw.endall,
+                    "celebration3.json"
+            );
+            markCompleteToastShown();
+        }
     }
 
     @Override
@@ -54,7 +68,10 @@ public class LessonFragment extends Fragment {
 
         lessonListView.setOnItemClickListener((parent, itemView, position, id) -> {
             SharedPreferences prefs = requireContext().getSharedPreferences("lesson_progress", Context.MODE_PRIVATE);
-            prefs.edit().putBoolean("lesson_read_" + position, true).apply();
+            prefs.edit()
+                    .putBoolean("lesson_read_" + position, true)
+                    .putBoolean("ref_lesson_" + (position + 1), true) // 👈 สำคัญ!
+                    .apply();
 
             Intent intent = new Intent(getActivity(), LessonDetailActivity.class);
             intent.putExtra("lessonIndex", position);
@@ -86,5 +103,26 @@ public class LessonFragment extends Fragment {
         progressText.setText("ความคืบหน้า: " + readCount + " / " + total + " บท");
         progressBar.setProgress(readCount);
     }
+
+    private boolean alreadyShownCompleteToast() {
+        SharedPreferences prefs = requireContext().getSharedPreferences("lesson_progress", Context.MODE_PRIVATE);
+        return prefs.getBoolean("all_lessons_complete_toast_shown", false);
+    }
+
+    private void markCompleteToastShown() {
+        SharedPreferences prefs = requireContext().getSharedPreferences("lesson_progress", Context.MODE_PRIVATE);
+        prefs.edit().putBoolean("all_lessons_complete_toast_shown", true).apply();
+    }
+
+    private boolean isAllLessonsCompleted() {
+        SharedPreferences prefs = requireContext().getSharedPreferences("lesson_progress", Context.MODE_PRIVATE);
+        return prefs.getBoolean("ref_lesson_1", false) &&
+                prefs.getBoolean("ref_lesson_2", false) &&
+                prefs.getBoolean("ref_lesson_3", false) &&
+                prefs.getBoolean("ref_lesson_4", false) &&
+                prefs.getBoolean("ref_lesson_5", false);
+    }
+
+
 
 }
