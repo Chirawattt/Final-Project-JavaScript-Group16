@@ -25,7 +25,7 @@ public class TeamFragment extends Fragment {
     };
 
     private Integer[] teamPictures = {
-            R.drawable.supa,
+            R.drawable.chrwyn_profile,
             R.drawable.supa,
             R.drawable.supa,
             R.drawable.supa
