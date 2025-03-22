@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="16dp">
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -10,6 +9,7 @@
         android:divider="?android:attr/dividerHorizontal"
         android:dividerPadding="8dp"
         android:orientation="vertical"
+        android:padding="16dp"
         android:showDividers="middle">
 
         <TextView
@@ -29,22 +29,22 @@
             android:id="@+id/overall_progress_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="@font/sarabun_bold"
             android:text="ความคืบหน้า: 0 / 5 บท"
             android:textColor="@android:color/white"
-            android:fontFamily="@font/sarabun_bold"
-            android:textSize="16sp"
-            android:layout_marginBottom="8dp" />
+            android:textSize="16sp" />
 
         <ProgressBar
             android:id="@+id/overall_progress_bar"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
             android:layout_width="match_parent"
             android:layout_height="12dp"
-            android:progress="0"
-            android:max="5"
-            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-            android:progressTint="@color/js_yellow"
+            android:layout_marginBottom="16dp"
             android:backgroundTint="#444"
-            android:layout_marginBottom="16dp" />
+            android:max="5"
+            android:progress="0"
+            android:progressTint="@color/js_yellow" />
 
         <LinearLayout
             android:id="@+id/quizLayout"
@@ -56,11 +56,11 @@
             android:id="@+id/reset_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="รีเซตคะแนนทั้งหมด"
+            android:layout_marginTop="16dp"
             android:backgroundTint="@color/js_yellow_dark"
-            android:textColor="@color/black"
             android:fontFamily="@font/sarabun_bold"
-            android:layout_marginTop="16dp"/>
+            android:text="รีเซตคะแนนทั้งหมด"
+            android:textColor="@color/black" />
 
     </LinearLayout>
 </ScrollView>
