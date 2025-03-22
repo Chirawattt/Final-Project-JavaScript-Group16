@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/quiz_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
+    android:background="#19191919"
     android:orientation="vertical"
     android:padding="24dp">
 
@@ -12,102 +13,131 @@
         android:id="@+id/progress_bar"
         style="@style/Widget.AppCompat.ProgressBar.Horizontal"
         android:layout_width="match_parent"
-        android:layout_height="8dp"
+        android:layout_height="10dp"
+        android:layout_marginTop="10dp"
         android:layout_marginBottom="16dp"
         android:max="100"
-        android:progress="0" />
+        android:progress="0"
+        android:progressTint="@color/js_yellow" />
 
     <!-- ข้อที่ X / 10 -->
     <TextView
         android:id="@+id/question_number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:fontFamily="@font/sarabun_bold"
         android:text="ข้อที่ 1 / 10"
         android:textColor="@color/js_yellow"
-        android:textSize="18sp"
-        android:fontFamily="@font/sarabun_bold"
-        android:layout_marginBottom="4dp" />
+        android:textSize="18sp" />
 
     <!-- ชื่อบท -->
     <TextView
         android:id="@+id/lesson_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:fontFamily="@font/sarabun_bold"
         android:text="บทที่ 3: ตัวดำเนินการ"
         android:textColor="@android:color/white"
-        android:textSize="16sp"
-        android:fontFamily="@font/sarabun_bold"
-        android:layout_marginBottom="16dp" />
+        android:textSize="16sp" />
 
     <!-- คำถาม -->
     <TextView
         android:id="@+id/question_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:fontFamily="@font/sarabun_bold"
         android:text="JavaScript เป็นภาษาแบบ...?"
         android:textColor="@android:color/white"
-        android:textSize="20sp"
-        android:fontFamily="@font/sarabun_bold"
-        android:layout_marginBottom="24dp" />
+        android:textSize="20sp" />
 
     <!-- ตัวเลือก -->
     <RadioGroup
         android:id="@+id/option_group"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginBottom="24dp">
+        android:layout_marginBottom="24dp"
+        android:orientation="vertical">
 
         <RadioButton
             android:id="@+id/option_a"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:buttonTint="@color/js_yellow"
+            android:fontFamily="@font/sarabun"
             android:text="A. ภาษาเชิงวัตถุ"
             android:textColor="@android:color/white"
-            android:textSize="16sp"
-            android:fontFamily="@font/sarabun"
-            android:buttonTint="@color/js_yellow" />
+            android:textSize="16sp" />
 
         <RadioButton
             android:id="@+id/option_b"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:buttonTint="@color/js_yellow"
+            android:fontFamily="@font/sarabun"
             android:text="B. ภาษาเชิงโครงสร้าง"
             android:textColor="@android:color/white"
-            android:textSize="16sp"
-            android:fontFamily="@font/sarabun"
-            android:buttonTint="@color/js_yellow" />
+            android:textSize="16sp" />
 
         <RadioButton
             android:id="@+id/option_c"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:buttonTint="@color/js_yellow"
+            android:fontFamily="@font/sarabun"
             android:text="C. ภาษาเชิงฟังก์ชัน"
             android:textColor="@android:color/white"
-            android:textSize="16sp"
-            android:fontFamily="@font/sarabun"
-            android:buttonTint="@color/js_yellow" />
+            android:textSize="16sp" />
 
         <RadioButton
             android:id="@+id/option_d"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:buttonTint="@color/js_yellow"
+            android:fontFamily="@font/sarabun"
             android:text="D. ภาษาสคริปต์"
             android:textColor="@android:color/white"
-            android:textSize="16sp"
-            android:fontFamily="@font/sarabun"
-            android:buttonTint="@color/js_yellow" />
+            android:textSize="16sp" />
     </RadioGroup>
 
-    <!-- ปุ่มถัดไป -->
-    <Button
-        android:id="@+id/next_question_button"
+    <!-- ตรงนี้คือส่วนของปุ่มย้อนกลับ + ถัดไป -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/btnCtrlContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="ถัดไป"
-        android:backgroundTint="@color/js_yellow_dark"
-        android:textColor="@color/black"
-        android:fontFamily="@font/sarabun_bold"
-        android:visibility="gone"/>
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="24dp">
+
+        <Button
+            android:id="@+id/btn_previous_question"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/js_yellow_dark"
+            android:fontFamily="@font/sarabun_bold"
+            android:text="ย้อนกลับ"
+            android:textColor="@android:color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/next_question_button"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/js_yellow_dark"
+            android:fontFamily="@font/sarabun_bold"
+            android:text="ถัดไป"
+            android:textColor="@android:color/black"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <!-- ปุ่มกลับ -->
+
 </LinearLayout>
 

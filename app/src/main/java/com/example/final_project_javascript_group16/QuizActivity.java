@@ -1,5 +1,6 @@
 package com.example.final_project_javascript_group16;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -22,7 +23,7 @@ public class QuizActivity extends AppCompatActivity {
     private TextView questionText, questionNumberText, lessonTitleText;
     private RadioGroup optionGroup;
     private RadioButton optionA, optionB, optionC, optionD;
-    private Button nextButton;
+    private Button nextButton, btnPreviousQuestion;
     private ProgressBar progressBar;
 
     private List<Question> questions;
@@ -50,6 +51,7 @@ public class QuizActivity extends AppCompatActivity {
         optionC = findViewById(R.id.option_c);
         optionD = findViewById(R.id.option_d);
         nextButton = findViewById(R.id.next_question_button);
+        btnPreviousQuestion = findViewById(R.id.btn_previous_question);
         progressBar = findViewById(R.id.progress_bar);
 
         // ตั้งชื่อบท
@@ -77,9 +79,28 @@ public class QuizActivity extends AppCompatActivity {
                 showScore();
             }
         });
+
+        btnPreviousQuestion.setOnClickListener(v -> {
+            if (currentIndex > 0) {
+                currentIndex--;
+                showQuestion();
+            } else {
+                // เป็นข้อแรก → ออกจากแบบทดสอบ
+                new AlertDialog.Builder(QuizActivity.this)
+                        .setTitle("ออกจากแบบทดสอบ")
+                        .setMessage("คุณต้องการออกจากแบบทดสอบใช่หรือไม่?")
+                        .setPositiveButton("ใช่", (dialog, which) -> {
+                            finish(); // กลับไปยัง QuizFragment
+                        })
+                        .setNegativeButton("ยกเลิก", null)
+                        .show();
+            }
+        });
+
     }
 
     private void showQuestion() {
+
         Question q = questions.get(currentIndex);
 
         questionText.setText(q.getQuestionText());
@@ -120,6 +141,7 @@ public class QuizActivity extends AppCompatActivity {
         if (score > oldScore) {
             prefs.edit().putInt("score_lesson_" + lessonNumber, score).apply();
         }
+        prefs.edit().putBoolean("just_finished_lesson_" + lessonNumber, true).apply();
 
         new AlertDialog.Builder(this)
                 .setTitle("คะแนนของคุณ")
@@ -130,4 +152,5 @@ public class QuizActivity extends AppCompatActivity {
                 })
                 .show();
     }
+
 }

@@ -5,6 +5,7 @@
     <color name="js_yellow_dark">#D4AF37</color> <!-- เหลืองเข้ม -->
     <color name="black">#191919</color> <!-- สีดำสนิท -->
     <color name="white">#FFFFFF</color>
-    <color name="green">#4CAF50</color>
+    <color name="green">#2E8E32</color>
     <color name="gray">#BDBDBD</color>
+    <color name="bg_Gray">#191919</color>
 </resources>

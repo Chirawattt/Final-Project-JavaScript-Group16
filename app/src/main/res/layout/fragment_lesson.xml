@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/d"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#19191919"
     android:orientation="vertical"
     android:padding="16dp"
     tools:context=".LessonFragment">
@@ -13,12 +13,35 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_marginTop="20dp"
         android:layout_marginBottom="10dp"
         android:fontFamily="@font/sarabun_bold"
         android:text="บทเรียน JavaScript"
         android:textColor="@color/js_yellow"
-        android:textSize="22sp"
+        android:textSize="24sp"
         android:textStyle="bold" />
+
+
+    <TextView
+        android:id="@+id/overall_progress_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="@font/sarabun_bold"
+        android:text="ความคืบหน้า: 0 / 5 บท"
+        android:textColor="@android:color/white"
+        android:textSize="16sp" />
+
+    <ProgressBar
+        android:id="@+id/overall_progress_bar"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="12dp"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="#444"
+        android:max="5"
+        android:progress="0"
+        android:progressTint="@color/js_yellow" />
 
     <ListView
         android:id="@+id/lesson_list"

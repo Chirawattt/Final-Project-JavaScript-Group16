@@ -1,6 +1,7 @@
 package com.example.final_project_javascript_group16;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.text.Html;
@@ -54,7 +55,6 @@ public class LessonDetailActivity extends AppCompatActivity implements View.OnCl
         // โหลดข้อมูลบทเรียน
         updateLesson(currentLesson);
 
-
     }
 
     @Override
@@ -69,12 +69,13 @@ public class LessonDetailActivity extends AppCompatActivity implements View.OnCl
             }
         } else if (id == R.id.next_button) {
             if (currentLesson < lessonLength) {
+                SharedPreferences prefs = getSharedPreferences("lesson_progress", MODE_PRIVATE);
+                prefs.edit().putBoolean("lesson_read_" + currentLesson, true).apply();
                 currentLesson++;
                 updateLesson(currentLesson);
+
             }
         } else if (id == R.id.back_to_main) {
-            Intent i = new Intent(LessonDetailActivity.this, MainActivity.class);
-            startActivity(i);
             finish();
         }
     }

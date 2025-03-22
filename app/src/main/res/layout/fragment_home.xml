@@ -1,41 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="vertical"
+    android:background="#19191919"
     tools:context=".HomeFragment">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_gravity="center"
-        android:contentDescription="JavaScript Logo"
-        android:src="@drawable/javascript_logo" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        android:fontFamily="@font/sarabun"
-        android:text="JavaScript Learning"
-        android:textColor="@color/js_yellow"
-        android:textSize="24sp"
-        android:textStyle="bold" />
+        android:background="#19191919"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="24dp">
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:fontFamily="@font/sarabun_bold"
-        android:paddingHorizontal="100dp"
-        android:text="เริ่มเรียนรู้"
-        android:textSize="20sp"
-        android:textStyle="bold" />
-</LinearLayout>
+        <!-- โลโก้ -->
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            android:contentDescription="JavaScript Logo"
+            android:src="@drawable/javascript_logo" />
+
+        <!-- หัวเรื่อง -->
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/sarabun_bold"
+            android:text="JavaScript Learning"
+            android:textColor="@color/js_yellow"
+            android:textSize="24sp" />
+
+        <!-- คำโปรย -->
+        <TextView
+            android:id="@+id/tagline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/sarabun"
+            android:gravity="center"
+            android:text="เรียนรู้ JavaScript เบื้องต้น\nเข้าใจง่าย พร้อมแบบฝึกหัดสนุก ๆ 🎉"
+            android:textAlignment="center"
+            android:textColor="@android:color/white"
+            android:textSize="16sp" />
+
+        <!-- Progress รวม -->
+        <TextView
+            android:id="@+id/overall_progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/sarabun_bold"
+            android:text="ความคืบหน้า: 3 / 5 บท"
+            android:textColor="@color/js_yellow"
+            android:textSize="16sp" />
+
+        <ProgressBar
+            android:id="@+id/overall_progress_bar"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:layout_marginTop="8dp"
+            android:max="100"
+            android:progress="60"
+            android:progressTint="@color/js_yellow" />
+
+        <!-- ปุ่มต่าง ๆ -->
+        <Button
+            android:id="@+id/btn_lesson"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:backgroundTint="@color/js_yellow"
+            android:fontFamily="@font/sarabun_bold"
+            android:text="เริ่มเรียนบทเรียน"
+            android:textColor="@android:color/black" />
+
+        <Button
+            android:id="@+id/btn_quiz"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:backgroundTint="@color/js_yellow_dark"
+            android:fontFamily="@font/sarabun_bold"
+            android:text="ทำแบบทดสอบ"
+            android:textColor="@android:color/black" />
+
+        <Button
+            android:id="@+id/btn_practice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:backgroundTint="@color/js_yellow_dark"
+            android:fontFamily="@font/sarabun_bold"
+            android:text="ฝึกเขียนโค้ด"
+            android:textColor="@android:color/black" />
+
+        <!-- Tip -->
+        <TextView
+            android:id="@+id/tip_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:fontFamily="@font/sarabun"
+            android:text="💡 Tip: `===` จะเช็คทั้งค่าและชนิดข้อมูล!"
+            android:textAlignment="center"
+            android:textColor="@android:color/white"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+</ScrollView>

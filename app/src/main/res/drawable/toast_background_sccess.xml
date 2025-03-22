@@ -1,0 +1,6 @@
+<!-- res/drawable/toast_background_success.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="#29712A" /> <!-- สีเขียว -->
+    <corners android:radius="16dp" />
+</shape>

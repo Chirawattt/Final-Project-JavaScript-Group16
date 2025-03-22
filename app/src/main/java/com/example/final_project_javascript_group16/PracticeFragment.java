@@ -3,6 +3,7 @@ package com.example.final_project_javascript_group16;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,6 +12,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +23,8 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.airbnb.lottie.LottieAnimationView;
 
 
 public class PracticeFragment extends Fragment {
@@ -37,6 +41,10 @@ public class PracticeFragment extends Fragment {
 
     private String expectedOutput = "";
     private PracticeQuestion currentQuestion;
+
+    private MediaPlayer mediaPlayer, levelUpPlayer, endAllPlayer;
+    private LottieAnimationView confettiAnimation, fireworkAnimation;
+
 
     @Nullable
     @Override
@@ -62,10 +70,18 @@ public class PracticeFragment extends Fragment {
         btnNextLesson = view.findViewById(R.id.btn_next_lesson);
         navigationButtons = view.findViewById(R.id.navigation_buttons);
 
+        confettiAnimation = view.findViewById(R.id.confetti_animation);
+        fireworkAnimation = view.findViewById(R.id.firework_animation);
+
+        mediaPlayer = MediaPlayer.create(getContext(), R.raw.correct_sound);
+        levelUpPlayer = MediaPlayer.create(getContext(), R.raw.levelup);
+        endAllPlayer = MediaPlayer.create(getContext(), R.raw.endall);
+
         setupWebView();
         loadPracticeQuestion();
         updateDifficultyIcons(btnEasy, btnMedium, btnHard);
         highlightSelectedDifficulty(btnEasy, btnMedium, btnHard);
+
 
         // Difficulty button listeners
         btnEasy.setOnClickListener(v -> {
@@ -197,6 +213,8 @@ public class PracticeFragment extends Fragment {
 
             if (output.equals(expectedOutput)) {
                 Toast.makeText(getContext(), "✅ คำตอบถูกต้อง!", Toast.LENGTH_SHORT).show();
+                mediaPlayer.start();
+
                 showSolutionButton.setVisibility(View.GONE);
 
                 SharedPreferences prefs = requireContext().getSharedPreferences("PracticeProgress", Context.MODE_PRIVATE);
@@ -215,12 +233,31 @@ public class PracticeFragment extends Fragment {
                     if (isLessonCompleted(lessonNumber)) {
                         if (lessonNumber < 5) {
                             Toast.makeText(getContext(), "🎉 ทำครบทั้งบทแล้ว! ไปบทถัดไป!", Toast.LENGTH_SHORT).show();
-                            lessonNumber++;
-                            difficultyLevel = 0;
-                            highlightSelectedDifficulty(btnEasy, btnMedium, btnHard);
-                            loadPracticeQuestion();
-                            updateDifficultyIcons(btnEasy, btnMedium, btnHard);
+                            levelUpPlayer.start();
+
+                            // 🎆 เล่นแอนิเมชัน
+                            confettiAnimation.setVisibility(View.VISIBLE);
+                            confettiAnimation.playAnimation();
+
+                            // เปลี่ยนบทหลังจากแอนิเมชันเล่นจบ (ประมาณ 2.5 วิ)
+                            new Handler().postDelayed(() -> {
+                                confettiAnimation.setVisibility(View.GONE);
+                                lessonNumber++;
+                                difficultyLevel = 0;
+                                highlightSelectedDifficulty(btnEasy, btnMedium, btnHard);
+                                loadPracticeQuestion();
+                                updateDifficultyIcons(btnEasy, btnMedium, btnHard);
+                            }, 2500);
                         } else {
+                            endAllPlayer.start();
+                            // 🎆 เล่นแอนิเมชัน
+                            fireworkAnimation.setVisibility(View.VISIBLE);
+                            fireworkAnimation.playAnimation();
+
+                            // เปลี่ยนบทหลังจากแอนิเมชันเล่นจบ (ประมาณ 2.5 วิ)
+                            new Handler().postDelayed(() -> {
+                                fireworkAnimation.setVisibility(View.GONE);
+                            }, 2500);
                             Toast.makeText(getContext(), "🎉 ทำครบทุกบทแล้ว! เก่งมาก!", Toast.LENGTH_LONG).show();
                         }
                     }
@@ -277,9 +314,9 @@ public class PracticeFragment extends Fragment {
         SharedPreferences prefs = requireContext().getSharedPreferences("PracticeProgress", Context.MODE_PRIVATE);
         prefs.edit().clear().apply();
         Toast.makeText(getContext(), "✅ ล้างความคืบหน้าเรียบร้อยแล้ว", Toast.LENGTH_SHORT).show();
+        lessonNumber = 1;
         loadPracticeQuestion();
         updateDifficultyIcons(btnEasy, btnMedium, btnHard);
-        lessonNumber = 1;
     }
 
     private String getDifficultyName(int level) {

@@ -3,18 +3,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#19191919"
     android:orientation="vertical"
+    android:padding="16dp"
     tools:context=".TeamFragment">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_marginTop="20dp"
         android:layout_marginBottom="10dp"
         android:fontFamily="@font/sarabun_bold"
         android:text="สมาชิกกลุ่ม"
         android:textColor="@color/js_yellow"
-        android:textSize="22sp"
+        android:textSize="24sp"
         android:textStyle="bold" />
 
     <GridView

@@ -104,10 +104,11 @@ public class PracticeBank {
         ));
 
         lesson4.add(new PracticeQuestion(
-                "ปานกลาง: ใช้ for loop แสดงเลขตั้งแต่ 1 ถึง 3 (console.log)",
-                "1\n2\n3", 1,
-                "for (let i = 1; i <= 3; i++) {\n  console.log(i);\n}\nreturn '1\\n2\\n3';"
+                "ปานกลาง: ใช้ for loop เพื่อรวมเลข 1 ถึง 3 เป็นข้อความเดียวแล้วแสดงผล",
+                "123", 1,
+                "let result = '';\nfor (let i = 1; i <= 3; i++) {\n  result += i;\n}\nreturn result;"
         ));
+
 
         lesson4.add(new PracticeQuestion(
                 "ยาก: ใช้ try...catch ตรวจจับ error จากตัวแปรที่ยังไม่ได้ประกาศ แล้วแสดง 'Caught Error'",
@@ -123,19 +124,19 @@ public class PracticeBank {
 
         // ง่าย
         lesson5.add(new PracticeQuestion(
-                "1️⃣ ง่าย: สร้างฟังก์ชันชื่อ greet ที่ return คำว่า 'Hello'",
+                "ง่าย: สร้างฟังก์ชันชื่อ greet ที่ return คำว่า 'Hello'",
                 "Hello", 0,
                 "function greet() {\n  return 'Hello';\n}\nreturn greet();"
         ));
 
         lesson5.add(new PracticeQuestion(
-                "2️⃣ ปานกลาง: สร้าง arrow function ที่รับชื่อ name และ return 'Hi, [name]' โดย name = 'Kaning'",
+                "ปานกลาง: สร้าง arrow function ที่รับชื่อ name และ return 'Hi, [name]' โดย name = 'Kaning'",
                 "Hi, Kaning", 1,
                 "const sayHi = name => 'Hi, ' + name;\nreturn sayHi('Kaning');"
         ));
 
         lesson5.add(new PracticeQuestion(
-                "3️⃣ ยาก: เขียน recursive function ที่คำนวณค่า factorial ของ 4 และแสดงผลลัพธ์",
+                "ยาก: เขียน recursive function ที่คำนวณค่า factorial ของ 4 และแสดงผลลัพธ์",
                 "24", 2,
                 "function factorial(n) {\n  if (n <= 1) return 1;\n  return n * factorial(n - 1);\n}\nreturn factorial(4);"
         ));
