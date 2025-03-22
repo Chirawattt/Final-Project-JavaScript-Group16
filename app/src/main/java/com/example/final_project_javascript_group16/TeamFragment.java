@@ -21,14 +21,14 @@ public class TeamFragment extends Fragment {
             "หัวหน้ากลุ่ม | Developer,6506021611017,นาย จีรวัฒน์ ญานะ",
             "UX/UI Designer,6506021611076,นาย นฤนาท คามวารี",
             "จัดทำเอกสาร,6506021611068,นาย ธนพนธ์ แจ้งสนธิ์ ",
-            "สีบค้นข้อมูล JavaScript,6506021621080,นาย ปรินทร สุทธิคุณ ",
+            "สืบค้นข้อมูล JavaScript,6506021621080,นาย ปรินทร สุทธิคุณ ",
     };
 
     private Integer[] teamPictures = {
             R.drawable.chrwyn_profile,
-            R.drawable.supa,
-            R.drawable.supa,
-            R.drawable.supa
+            R.drawable.gawston,
+            R.drawable.frame,
+            R.drawable.champ
     };
 
     public TeamFragment () {}
