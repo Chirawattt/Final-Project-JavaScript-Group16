@@ -34,20 +34,7 @@ public class LessonDetailActivity extends AppCompatActivity implements View.OnCl
         setContentView(R.layout.activity_lesson_detail);
 
         // เชื่อมโยง UI
-        lessonTitle = findViewById(R.id.lesson_title);
-        lessonIntro = findViewById(R.id.lesson_intro);
-        lessonContent = findViewById(R.id.lesson_content);
-        exampleCodeButtons = findViewById(R.id.example_code_buttons);
-        codeInput = findViewById(R.id.code_input);
-        codeOutput = findViewById(R.id.code_output);
-        runButton = findViewById(R.id.run_button);
-        runButton.setOnClickListener(this);
-        prevButton = findViewById(R.id.prev_button);
-        prevButton.setOnClickListener(this);
-        nextButton = findViewById(R.id.next_button);
-        nextButton.setOnClickListener(this);
-        backToMainButton = findViewById(R.id.back_to_main);
-        backToMainButton.setOnClickListener(this);
+        setUpGUI();
 
         Intent i = getIntent();
         currentLesson = (i.getIntExtra("lessonIndex", 1) + 1);
@@ -71,7 +58,7 @@ public class LessonDetailActivity extends AppCompatActivity implements View.OnCl
             if (currentLesson < lessonLength) {
                 SharedPreferences prefs = getSharedPreferences("lesson_progress", MODE_PRIVATE);
                 prefs.edit()
-                        .putBoolean("ref_lesson_" + (currentLesson + 1), true)
+                        .putBoolean("ref_lesson_" + currentLesson, true)
                         .putBoolean("lesson_read_" + currentLesson, true)
                         .apply();
                 currentLesson++;
@@ -107,52 +94,63 @@ public class LessonDetailActivity extends AppCompatActivity implements View.OnCl
             // สร้างปุ่มตัวอย่างโค้ดใหม่
             if (exampleCodes != null) {
                 for (int i = 0; i < exampleCodes.length; i++) {
-                    Button exampleButton = new Button(this);
-                    exampleButton.setText("ตัวอย่างที่ " + (i + 1));
-                    // ตั้งค่าฟอนต์, ระยะห่าง, และขอบมน
-                    exampleButton.setTypeface(getResources().getFont(R.font.sarabun_bold));
-                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                            LinearLayout.LayoutParams.WRAP_CONTENT,
-                            LinearLayout.LayoutParams.WRAP_CONTENT);
-                    params.setMargins(10, 5, 10, 5); // ระยะห่างระหว่างปุ่ม
-                    exampleButton.setLayoutParams(params);
-
-                    // กำหนด background เป็นสีเหลืองและขอบมน
-                    GradientDrawable shape = new GradientDrawable();
-                    shape.setCornerRadius(30); // ทำให้ปุ่มโค้งมน
-                    shape.setColor(getResources().getColor(R.color.js_yellow));
-                    exampleButton.setBackground(shape);
-                    exampleButton.setTextColor(getResources().getColor(R.color.black));
-
-                    final int index = i;
-                    exampleButton.setOnClickListener(v -> {
-                        codeInput.setText(Html.fromHtml(exampleCodes[index])); // ใส่โค้ดในช่อง Input
-                        selectedExampleIndex = index; // บันทึกตัวอย่างที่เลือก
-                    });
-
-                    exampleCodeButtons.addView(exampleButton);
+                    exampleCodeButtons.addView(createExampleButton(i, exampleCodes[i]));
                 }
             }
 
             // **เลื่อน ScrollView ไปด้านบนสุด**
             ScrollView lessonScrollView = findViewById(R.id.lesson_scroll_view);
-            lessonScrollView.post(() -> lessonScrollView.scrollTo(0, 0));
+            lessonScrollView.post(() -> lessonScrollView.smoothScrollTo(0, 0));
 
-            // **ควบคุมการแสดงผลของปุ่ม Next และ Prev**
-            Button prevButton = findViewById(R.id.prev_button);
-            Button nextButton = findViewById(R.id.next_button);
-
-            if (lessonNumber == 1) {
-                prevButton.setVisibility(View.GONE);  // ซ่อนปุ่ม Previous
-                nextButton.setVisibility(View.VISIBLE);  // แสดงปุ่ม Next
-            } else if (lessonNumber == lessonLength) {
-                prevButton.setVisibility(View.VISIBLE);  // แสดงปุ่ม Previous
-                nextButton.setVisibility(View.GONE);  // ซ่อนปุ่ม Next
-            } else {
-                prevButton.setVisibility(View.VISIBLE);
-                nextButton.setVisibility(View.VISIBLE);
-            }
+            updateNavigationButtons(lessonNumber);
         }
+    }
+
+    private void setUpGUI() {
+        lessonTitle = findViewById(R.id.lesson_title);
+        lessonIntro = findViewById(R.id.lesson_intro);
+        lessonContent = findViewById(R.id.lesson_content);
+        exampleCodeButtons = findViewById(R.id.example_code_buttons);
+        codeInput = findViewById(R.id.code_input);
+        codeOutput = findViewById(R.id.code_output);
+        runButton = findViewById(R.id.run_button);
+        prevButton = findViewById(R.id.prev_button);
+        nextButton = findViewById(R.id.next_button);
+        backToMainButton = findViewById(R.id.back_to_main);
+        runButton.setOnClickListener(this);
+        prevButton.setOnClickListener(this);
+        nextButton.setOnClickListener(this);
+        backToMainButton.setOnClickListener(this);
+    }
+
+    private Button createExampleButton(int index, String code) {
+        Button exampleButtom = new Button(this);
+        exampleButtom.setText("ตัวอย่างที่ " + (index + 1));
+        exampleButtom.setTypeface(getResources().getFont(R.font.sarabun_bold));
+
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT);
+        params.setMargins(10, 5, 10, 5);
+        exampleButtom.setLayoutParams(params);
+
+        GradientDrawable shape = new GradientDrawable();
+        shape.setCornerRadius(30);
+        shape.setColor(getResources().getColor(R.color.js_yellow));
+        exampleButtom.setBackground(shape);
+        exampleButtom.setTextColor(getResources().getColor(R.color.black));
+
+        exampleButtom.setOnClickListener(v -> {
+            codeInput.setText(Html.fromHtml(code));
+            selectedExampleIndex = index;
+        });
+
+        return exampleButtom;
+    }
+
+    private void updateNavigationButtons(int lessonNumber) {
+        prevButton.setVisibility(lessonNumber == 1 ? View.GONE : View.VISIBLE);
+        nextButton.setVisibility(lessonNumber == lessonLength ? View.GONE : View.VISIBLE);;
     }
 
     // Mockup Output ตามตัวอย่างที่เลือก

@@ -7,7 +7,6 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,20 +21,18 @@ public class LessonFragment extends Fragment {
 
     private ListView lessonListView;
 
-    private String[] lessonTitles = {
-            "1. ชนิดข้อมูล (Data Types)",
-            "2. ตัวแปร (Variables)",
-            "3. ตัวดำเนินการ (Operators)",
-            "4. คำสั่งควบคุม (Control Structures)",
-            "5. ฟังก์ชัน (Functions)"
-    };
+    private String[] lessonTitles = LessonManager.TITLES;
 
-    public LessonFragment() {}
+    private static final String PREF_NAME = "lesson_progress";
 
     @Override
     public void onResume() {
         super.onResume();
+        if (getView() == null) return;
+
         ListView lessonListView = requireView().findViewById(R.id.lesson_list);
+        if (lessonListView == null) return;
+
         loadLesson(lessonListView); // โหลดใหม่ทุกครั้งที่กลับมาหน้านี้
         updateProgressUI();
 
@@ -67,10 +64,10 @@ public class LessonFragment extends Fragment {
         loadLesson(lessonListView); // โหลดบทเรียนครั้งแรก
 
         lessonListView.setOnItemClickListener((parent, itemView, position, id) -> {
-            SharedPreferences prefs = requireContext().getSharedPreferences("lesson_progress", Context.MODE_PRIVATE);
+            SharedPreferences prefs = requireContext().getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
             prefs.edit()
                     .putBoolean("lesson_read_" + position, true)
-                    .putBoolean("ref_lesson_" + (position + 1), true) // 👈 สำคัญ!
+                    .putBoolean("ref_lesson_" + position, true) // 👈 สำคัญ!
                     .apply();
 
             Intent intent = new Intent(getActivity(), LessonDetailActivity.class);
@@ -87,15 +84,8 @@ public class LessonFragment extends Fragment {
     }
 
     private void updateProgressUI() {
-        SharedPreferences prefs = requireContext().getSharedPreferences("lesson_progress", Context.MODE_PRIVATE);
         int total = lessonTitles.length;
-        int readCount = 0;
-
-        for (int i = 0; i < total; i++) {
-            if (prefs.getBoolean("lesson_read_" + i, false)) {
-                readCount++;
-            }
-        }
+        int readCount = getCompletedLessonsCount();
 
         TextView progressText = requireView().findViewById(R.id.overall_progress_text);
         ProgressBar progressBar = requireView().findViewById(R.id.overall_progress_bar);
@@ -104,25 +94,31 @@ public class LessonFragment extends Fragment {
         progressBar.setProgress(readCount);
     }
 
+    private int getCompletedLessonsCount() {
+        SharedPreferences prefs = requireContext().getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+        int count = 0;
+        for (int i = 0; i < lessonTitles.length; i++) {
+            if (prefs.getBoolean("lesson_read_" + i, false)) count++;
+        }
+        return count;
+    }
+
     private boolean alreadyShownCompleteToast() {
-        SharedPreferences prefs = requireContext().getSharedPreferences("lesson_progress", Context.MODE_PRIVATE);
+        SharedPreferences prefs = requireContext().getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
         return prefs.getBoolean("all_lessons_complete_toast_shown", false);
     }
 
     private void markCompleteToastShown() {
-        SharedPreferences prefs = requireContext().getSharedPreferences("lesson_progress", Context.MODE_PRIVATE);
+        SharedPreferences prefs = requireContext().getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
         prefs.edit().putBoolean("all_lessons_complete_toast_shown", true).apply();
     }
 
     private boolean isAllLessonsCompleted() {
-        SharedPreferences prefs = requireContext().getSharedPreferences("lesson_progress", Context.MODE_PRIVATE);
-        return prefs.getBoolean("ref_lesson_1", false) &&
+        SharedPreferences prefs = requireContext().getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+        return prefs.getBoolean("ref_lesson_0", false) &&
+                prefs.getBoolean("ref_lesson_1", false) &&
                 prefs.getBoolean("ref_lesson_2", false) &&
                 prefs.getBoolean("ref_lesson_3", false) &&
-                prefs.getBoolean("ref_lesson_4", false) &&
-                prefs.getBoolean("ref_lesson_5", false);
+                prefs.getBoolean("ref_lesson_4", false);
     }
-
-
-
 }

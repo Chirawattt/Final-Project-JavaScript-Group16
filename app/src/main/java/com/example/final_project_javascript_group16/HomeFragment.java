@@ -18,15 +18,9 @@ import java.util.Random;
 
 public class HomeFragment extends Fragment {
 
-    public HomeFragment() { }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-
-        SharedPreferences prefs = getContext().getSharedPreferences("lesson_progress", Context.MODE_PRIVATE);
-        prefs.edit().clear().apply(); // 🔁 เคลียร์ทุกบท
-        prefs.edit().remove("all_lessons_complete_toast_shown").apply();
 
         // ปุ่มต่าง ๆ
         Button btnLesson = view.findViewById(R.id.btn_lesson);
@@ -37,13 +31,7 @@ public class HomeFragment extends Fragment {
         // Progress Bar
         SharedPreferences lessonPrefs = requireContext().getSharedPreferences("lesson_progress", Context.MODE_PRIVATE);
         int lessonCount = 5;
-        int lessonsCompleted = 0;
-
-        for (int i = 0; i < lessonCount; i++) {
-            if (lessonPrefs.getBoolean("lesson_read_" + i, false)) {
-                lessonsCompleted++;
-            }
-        }
+        int lessonsCompleted = getLessonsCompleted(lessonPrefs, lessonCount);
 
         TextView progressText = view.findViewById(R.id.overall_progress);
         ProgressBar progressBar = view.findViewById(R.id.overall_progress_bar);
@@ -63,32 +51,40 @@ public class HomeFragment extends Fragment {
         int index = new Random().nextInt(tips.length);
         tipText.setText(tips[index]);
 
-        // ปุ่มเริ่มเรียนบทเรียน
+        // ให้ bottomNavigation เปลี่ยนเมนูที่เลือกตามปุ่มที่อยู่ใน fragment
+        // navigationBottomView อยู่ใน MainActivity จึงต้องให้ fragment เรียกใช้ผ่าน MainActivity ที่ถือ bottomNavigationView ไว้
         btnLesson.setOnClickListener(v -> {
-            requireActivity().getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.fragment_container, new LessonFragment())
-                    .addToBackStack(null)
-                    .commit();
+            ((MainActivity) requireActivity()).setBottomNavSelected(R.id.nav_lesson);
+            navigateTo(new LessonFragment());
         });
-
-        // ปุ่มทำแบบทดสอบ
         btnQuiz.setOnClickListener(v -> {
-            requireActivity().getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.fragment_container, new QuizFragment())
-                    .addToBackStack(null)
-                    .commit();
+            ((MainActivity) requireActivity()).setBottomNavSelected(R.id.nav_quiz);
+            navigateTo(new QuizFragment());
         });
-        // ปุ่มฝึกเขียนโค้ด
         btnPractice.setOnClickListener(v -> {
-            requireActivity().getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.fragment_container, new PracticeFragment())
-                    .addToBackStack(null)
-                    .commit();
+            ((MainActivity) requireActivity()).setBottomNavSelected(R.id.nav_practice);
+            navigateTo(new PracticeFragment());
         });
 
         return view;
     }
+
+    private void navigateTo(Fragment fragment) {
+        requireActivity().getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragment_container, fragment)
+                .addToBackStack(null)
+                .commit();
+    }
+
+    private int getLessonsCompleted(SharedPreferences prefs, int lessonCount) {
+        int lessonsCompleted = 0;
+        for (int i = 0; i < lessonCount; i++) {
+            if (prefs.getBoolean("lesson_read_" + i, false)) {
+                lessonsCompleted++;
+            }
+        }
+        return lessonsCompleted;
+    }
+
 }

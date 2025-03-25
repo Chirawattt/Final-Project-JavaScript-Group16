@@ -31,8 +31,6 @@ public class TeamFragment extends Fragment {
             R.drawable.champ
     };
 
-    public TeamFragment () {}
-
     @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

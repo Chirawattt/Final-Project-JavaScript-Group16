@@ -8,7 +8,6 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
@@ -28,7 +27,6 @@ import com.airbnb.lottie.LottieAnimationView;
 
 
 public class PracticeFragment extends Fragment {
-
     private TextView practiceTitle, practiceQuestion, codeOutput;
     private EditText codeInput;
     private WebView webView;
@@ -84,26 +82,9 @@ public class PracticeFragment extends Fragment {
 
 
         // Difficulty button listeners
-        btnEasy.setOnClickListener(v -> {
-            difficultyLevel = 0;
-            highlightSelectedDifficulty(btnEasy, btnMedium, btnHard);
-            loadPracticeQuestion();
-            updateDifficultyIcons(btnEasy, btnMedium, btnHard);
-        });
-
-        btnMedium.setOnClickListener(v -> {
-            difficultyLevel = 1;
-            highlightSelectedDifficulty(btnMedium, btnEasy, btnHard);
-            loadPracticeQuestion();
-            updateDifficultyIcons(btnEasy, btnMedium, btnHard);
-        });
-
-        btnHard.setOnClickListener(v -> {
-            difficultyLevel = 2;
-            highlightSelectedDifficulty(btnHard, btnEasy, btnMedium);
-            loadPracticeQuestion();
-            updateDifficultyIcons(btnEasy, btnMedium, btnHard);
-        });
+       btnEasy.setOnClickListener(v -> selectDifficulty(0, btnEasy, btnMedium, btnHard));
+       btnMedium.setOnClickListener(v -> selectDifficulty(1, btnMedium, btnEasy, btnHard));
+       btnHard.setOnClickListener(v -> selectDifficulty(2, btnHard, btnEasy, btnMedium));
 
         // Run code
         runButton.setOnClickListener(v -> runCode());
@@ -113,23 +94,12 @@ public class PracticeFragment extends Fragment {
 
         // Show solution button
         showSolutionButton.setOnClickListener(v -> {
-            if (currentQuestion != null) {
-                new AlertDialog.Builder(getContext())
-                        .setTitle("💡 เฉลย")
-                        .setMessage(currentQuestion.getSolutionHint())
-                        .setPositiveButton("เข้าใจแล้ว", null)
-                        .show();
-            }
+            showAnswerDialog();
         });
 
         // Reset progress button
         resetButton.setOnClickListener(v -> {
-            new AlertDialog.Builder(getContext())
-                    .setTitle("รีเซ็ตความคืบหน้า")
-                    .setMessage("คุณแน่ใจหรือไม่ว่าต้องการล้างความคืบหน้าในโหมดฝึกฝนทั้งหมด?")
-                    .setPositiveButton("ตกลง", (dialog, which) -> resetPracticeProgress())
-                    .setNegativeButton("ยกเลิก", null)
-                    .show();
+            showResetDialog();
         });
 
         btnPrevLesson.setOnClickListener(v -> {
@@ -335,6 +305,44 @@ public class PracticeFragment extends Fragment {
             case 2: return btnHard;
             default: return btnEasy;
         }
+    }
+
+    private void selectDifficulty(int level, Button selected, Button... others) {
+        difficultyLevel = level;
+        highlightSelectedDifficulty(selected, others);
+        loadPracticeQuestion();
+        updateDifficultyIcons(btnEasy, btnMedium, btnHard);
+    }
+
+    private void showAnswerDialog() {
+        DialogUtil.showCustomDialog(
+                getContext(),
+                "💡 เฉลย",
+                currentQuestion.getSolutionHint(),
+                "เข้าใจแล้ว",
+                null,
+                android.R.color.black,
+                android.R.color.black,
+                () -> {
+                    // โค้ดเมื่อกด "ใช่"
+                }
+        );
+    }
+
+    private void showResetDialog() {
+        DialogUtil.showCustomDialog(
+                getContext(),
+                "รีเซ็ตข้อมูล",
+                "คุณต้องการล้างคะแนนทั้งหมดใช่หรือไม่?",
+                "ใช่",
+                "ยกเลิก",
+                R.color.red,
+                android.R.color.black,
+                () -> {
+                    // โค้ดเมื่อกด "ใช่"
+                    resetPracticeProgress();
+                }
+        );
     }
 
 }

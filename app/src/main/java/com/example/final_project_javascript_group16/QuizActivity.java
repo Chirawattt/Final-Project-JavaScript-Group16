@@ -1,6 +1,5 @@
 package com.example.final_project_javascript_group16;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -15,7 +14,6 @@ import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class QuizActivity extends AppCompatActivity {
@@ -85,29 +83,21 @@ public class QuizActivity extends AppCompatActivity {
                 currentIndex--;
                 showQuestion();
             } else {
-                // เป็นข้อแรก → ออกจากแบบทดสอบ
-                new AlertDialog.Builder(QuizActivity.this)
-                        .setTitle("ออกจากแบบทดสอบ")
-                        .setMessage("คุณต้องการออกจากแบบทดสอบใช่หรือไม่?")
-                        .setPositiveButton("ใช่", (dialog, which) -> {
-                            finish(); // กลับไปยัง QuizFragment
-                        })
-                        .setNegativeButton("ยกเลิก", null)
-                        .show();
+                showConfirmationDialog();
             }
         });
 
     }
 
     private void showQuestion() {
-
         Question q = questions.get(currentIndex);
 
         questionText.setText(q.getQuestionText());
-        optionA.setText("A. " + q.getOptions()[0]);
-        optionB.setText("B. " + q.getOptions()[1]);
-        optionC.setText("C. " + q.getOptions()[2]);
-        optionD.setText("D. " + q.getOptions()[3]);
+        String[] opts = q.getOptions();
+        optionA.setText("A. " + opts[0]);
+        optionB.setText("B. " + opts[1]);
+        optionC.setText("C. " + opts[2]);
+        optionD.setText("D. " + opts[3]);
 
         questionNumberText.setText("ข้อที่ " + (currentIndex + 1) + " / " + questions.size());
         progressBar.setProgress((int) (((currentIndex + 1.0) / questions.size()) * 100));
@@ -151,6 +141,22 @@ public class QuizActivity extends AppCompatActivity {
                     finish(); // กลับไปหน้า QuizFragment
                 })
                 .show();
+    }
+
+    private void showConfirmationDialog() {
+        DialogUtil.showCustomDialog(
+                this,
+                "ออกจากแบบทดสอบ",
+                "คุณต้องการออกจากแบบทดสอบใช่หรือไม่?",
+                "ใช่",
+                "ยกเลิก",
+                R.color.red,
+                android.R.color.black,
+                () -> {
+                    // โค้ดเมื่อกด "ใช่"
+                    finish();
+                }
+        );
     }
 
 }
