@@ -132,15 +132,7 @@ public class QuizActivity extends AppCompatActivity {
             prefs.edit().putInt("score_lesson_" + lessonNumber, score).apply();
         }
         prefs.edit().putBoolean("just_finished_lesson_" + lessonNumber, true).apply();
-
-        new AlertDialog.Builder(this)
-                .setTitle("คะแนนของคุณ")
-                .setMessage("คุณได้คะแนน " + score + " จาก " + questions.size())
-                .setCancelable(false)
-                .setPositiveButton("กลับไปยังหน้าแรก", (dialog, which) -> {
-                    finish(); // กลับไปหน้า QuizFragment
-                })
-                .show();
+        showScoreDialog(score);
     }
 
     private void showConfirmationDialog() {
@@ -151,6 +143,21 @@ public class QuizActivity extends AppCompatActivity {
                 "ใช่",
                 "ยกเลิก",
                 R.color.red,
+                android.R.color.black,
+                () -> {
+                    // โค้ดเมื่อกด "ใช่"
+                    finish();
+                }
+        );
+    }
+    private void showScoreDialog(int score) {
+        DialogUtil.showCustomDialog(
+                this,
+                "คะแนนของคุณ",
+                "คุณได้คะแนน " + score + " จาก " + questions.size(),
+                "กลับไปยัง Quiz",
+                null,
+                R.color.green,
                 android.R.color.black,
                 () -> {
                     // โค้ดเมื่อกด "ใช่"
