@@ -13,6 +13,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.List;
 
 public class QuizActivity extends AppCompatActivity {
@@ -22,12 +24,13 @@ public class QuizActivity extends AppCompatActivity {
     private RadioButton optionA, optionB, optionC, optionD;
     private Button nextButton, btnPreviousQuestion;
     private ProgressBar progressBar;
-
     private List<Question> questions;
     private int currentIndex = 0;
     private int score = 0;
     private int lessonNumber;
     private String lessonName;
+    private boolean[] answeredCorrectly;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +67,9 @@ public class QuizActivity extends AppCompatActivity {
         optionGroup.setOnCheckedChangeListener((group, checkedId) -> {
             nextButton.setVisibility(View.VISIBLE);
         });
+
+        answeredCorrectly = new boolean[questions.size()];
+        Arrays.fill(answeredCorrectly, false);
 
         // เมื่อกดปุ่มถัดไป
         nextButton.setOnClickListener(v -> {
@@ -120,7 +126,17 @@ public class QuizActivity extends AppCompatActivity {
         else if (checkedId == R.id.option_d) selectedIndex = 3;
 
         if (selectedIndex == questions.get(currentIndex).getCorrectIndex()) {
-            score++;
+            // เช็คว่าเคยตรวจข้อนี้ไปรึยัง
+            if (!answeredCorrectly[currentIndex]) {
+                score++;
+                answeredCorrectly[currentIndex] = true;
+            }
+        }else {
+            // ถ้าเคยตอบถูกแล้วกลับมาตอบผิดก -> ลดคะแนน และ unflag
+            if (answeredCorrectly[currentIndex]) {
+                score--;
+                answeredCorrectly[currentIndex] = false;
+            }
         }
     }
 
