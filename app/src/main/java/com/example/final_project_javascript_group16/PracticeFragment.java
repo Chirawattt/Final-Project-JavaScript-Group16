@@ -126,8 +126,10 @@ public class PracticeFragment extends Fragment {
     }
 
     private void setupWebView() {
+        // เปิดให้ WebView รัน JavaScript ได้
         webView.getSettings().setJavaScriptEnabled(true);
         webView.setWebChromeClient(new WebChromeClient());
+        // โหลด HTML เปล่าเข้า WebView แล้วใช้ evaluateJavascript() เพื่อรัน JavaScript ภายใน
         webView.loadDataWithBaseURL(null, "<html><body></body></html>", "text/html", "UTF-8", null);
     }
 
@@ -164,6 +166,8 @@ public class PracticeFragment extends Fragment {
         String jsCode = "(function() {" + userCode + "})()";
 
         webView.evaluateJavascript(jsCode, value -> {
+            // Android จะส่ง value กลับมาในรูปแบบ "ผลลัพธ์" (มีเครื่องหมาย quote ครอบ)
+            // เช่น "8" → เราต้องลบเครื่องหมาย " ออก เช่น value = "\"8\"" → output = "8"
             String output = value.replaceAll("^\"|\"$", "");
             codeOutput.setText(output);
         });
