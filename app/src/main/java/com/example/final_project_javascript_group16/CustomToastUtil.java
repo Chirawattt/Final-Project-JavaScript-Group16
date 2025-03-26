@@ -17,8 +17,6 @@ import androidx.annotation.Nullable;
 
 import com.airbnb.lottie.LottieAnimationView;
 
-import java.io.IOException;
-
 public class CustomToastUtil {
 
     public static void show(Context context, Activity activity,

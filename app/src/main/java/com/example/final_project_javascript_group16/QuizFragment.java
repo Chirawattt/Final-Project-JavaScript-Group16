@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +16,6 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
@@ -59,21 +59,18 @@ public class QuizFragment extends Fragment {
     private void checkAndShowToastOnReturn() {
         prefs = requireContext().getSharedPreferences("quiz_scores", Context.MODE_PRIVATE);
 
-        for (int lesson = 1; lesson <= 5; lesson++) {
+        for (int lesson = 0; lesson < lessonTitles.length; lesson++) {
             int highestScore = prefs.getInt("score_lesson_" + lesson, 0);
             boolean justFinished = prefs.getBoolean("just_finished_lesson_" + lesson, false);
 
             if (highestScore > 0 && justFinished) {
                 showFeedbackForLesson(highestScore);
-                markToastShown(lesson);
-
-                // ✅ เคลียร์ flag การจบแบบทดสอบเพื่อไม่ให้แสดง toast ซ้ำ
+                // เคลียร์ flag การจบแบบทดสอบเพื่อไม่ให้แสดง toast ซ้ำ
                 prefs.edit().putBoolean("just_finished_lesson_" + lesson, false).apply();
                 break;
             }
         }
     }
-
     private void reloadLessonCardsWithAnimation() {
         if (quizLayout != null) quizLayout.removeAllViews();
         Context context = getContext();
@@ -86,19 +83,20 @@ public class QuizFragment extends Fragment {
     private void generateLessonCards() {
         Context context = getContext();
         int passedCount = 0;
-        AtomicReference<SharedPreferences> prefs = new AtomicReference<>(context.getSharedPreferences("quiz_scores", Context.MODE_PRIVATE));
+        SharedPreferences prefs = context.getSharedPreferences("quiz_scores", Context.MODE_PRIVATE);
 
-        for (int i = 1; i <= lessonTitles.length; i++) {
-            int score = prefs.get().getInt("score_lesson_" + i, 0);
+        for (int i = 0; i < lessonTitles.length; i++) {
+            int score = prefs.getInt("score_lesson_" + i, 0);
             if (score >= 5) passedCount++;
         }
 
         progressText.setText("ความคืบหน้า: " + passedCount + " / " + lessonTitles.length + " บท");
-        progressBar.setProgress(passedCount);
+        progressBar.setProgress(passedCount, true);
 
         for (int i = 0; i < lessonTitles.length; i++) {
-            int lessonNumber = i + 1;
-            int score = prefs.get().getInt("score_lesson_" + lessonNumber, 0);
+            int lessonNumber = i;
+            int score = prefs.getInt("score_lesson_" + lessonNumber, 0);
+
             TextView card = new TextView(context);
             card.setText(lessonTitles[i] + "\nคะแนน: " + score + "/10");
             card.setTextColor(ContextCompat.getColor(context, android.R.color.black));
@@ -107,6 +105,7 @@ public class QuizFragment extends Fragment {
             card.setPadding(40, 50, 40, 50);
             card.setClickable(true);
             card.setFocusable(true);
+
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT
@@ -115,26 +114,24 @@ public class QuizFragment extends Fragment {
             card.setLayoutParams(params);
 
             boolean isLocked = isLessonLocked(lessonNumber);
-
             applyCardStyle(context, card, lessonNumber, score, isLocked);
 
             if (!isLocked) {
                 int finalI = i;
                 card.setOnClickListener(v -> {
                     // 🧼 เคลียร์ flag การแสดง toast ของบทนั้นก่อน
-                    prefs.set(context.getSharedPreferences("quiz_scores", Context.MODE_PRIVATE));
-                    prefs.get().edit().remove("toast_shown_lesson_" + lessonNumber).apply();
+                    prefs.edit().remove("toast_shown_lesson_" + lessonNumber).apply();
 
                     Intent intent = new Intent(getActivity(), QuizActivity.class);
                     intent.putExtra("lessonNumber", lessonNumber);
-                    intent.putExtra("lessonName", lessonTitles[finalI].replace("บทที่ " + lessonNumber + ": ", ""));
+                    intent.putExtra("lessonName", lessonTitles[finalI]);
                     startActivity(intent);
                 });
             }
-
             quizLayout.addView(card);
         }
     }
+
 
     private void showResetConfirmation() {
         DialogUtil.showCustomDialog(
@@ -154,11 +151,6 @@ public class QuizFragment extends Fragment {
                 }
         );
 
-    }
-
-    private void markToastShown(int lesson) {
-        SharedPreferences prefs = requireContext().getSharedPreferences("quiz_scores", Context.MODE_PRIVATE);
-        prefs.edit().putBoolean("toast_shown_lesson_" + lesson, true).apply();
     }
 
     private void showFeedbackForLesson(int score) {
@@ -196,10 +188,10 @@ public class QuizFragment extends Fragment {
     }
 
     private boolean isLessonLocked(int lessonNumber) {
-        return (lessonNumber > 1) && (prefs.getInt("score_lesson_" + (lessonNumber - 1), 0) < 5);
+        return (lessonNumber > 0) && (prefs.getInt("score_lesson_" + (lessonNumber - 1), 0) < 5);
     }
     private void applyCardStyle(Context context,TextView card, int lessonNumber, int score, boolean isLocked) {
-        if (lessonNumber == 1 && score == 0) {
+        if (lessonNumber == 0 && score == 0) {
             card.setBackground(ContextCompat.getDrawable(context, R.drawable.card_quiz_background));
         }else if (score >= 8) {
             card.setBackground(ContextCompat.getDrawable(context, R.drawable.card_quiz_pass_background));

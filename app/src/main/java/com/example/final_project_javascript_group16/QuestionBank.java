@@ -9,7 +9,7 @@ public class QuestionBank {
         List<Question> questions = new ArrayList<>();
 
         switch (lessonNumber) {
-            case 1:
+            case 0: // บทที่ 1
                 questions.add(new Question(
                         "ข้อใดคือชนิดข้อมูลพื้นฐานใน JavaScript?",
                         new String[]{"Number, String, Boolean", "Class, Object, Function", "Integer, Char, Boolean", "Document, Window, Event"},
@@ -87,7 +87,7 @@ public class QuestionBank {
                 break;
 
 
-            case 2:
+            case 1:
                 questions.add(new Question(
                         "คำว่า \"ตัวแปร\" (Variable) ใน JavaScript ใช้เพื่ออะไร?",
                         new String[]{"เก็บข้อมูลในหน่วยความจำ", "แสดงข้อความบนหน้าเว็บ", "สร้างปุ่ม", "โหลดไฟล์ภายนอก"},
@@ -160,7 +160,7 @@ public class QuestionBank {
                 break;
 
 
-            case 3:
+            case 2:
                 questions.add(new Question(
                         "ข้อใดคือตัวดำเนินการทางคณิตศาสตร์ใน JavaScript?",
                         new String[]{"+, -, *, /, %", "==, !=, >", "&&, ||, !", "+++, ---"},
@@ -237,7 +237,7 @@ public class QuestionBank {
                 ));
                 break;
 
-            case 4:
+            case 3:
                 questions.add(new Question(
                         "คำสั่งใดใช้สำหรับตรวจสอบเงื่อนไขใน JavaScript?",
                         new String[]{"switch", "loop", "if", "for"},
@@ -344,7 +344,7 @@ public class QuestionBank {
                 ));
                 break;
 
-            case 5:
+            case 4:
                 questions.add(new Question(
                         "ฟังก์ชันใน JavaScript ใช้เพื่ออะไร?",
                         new String[]{

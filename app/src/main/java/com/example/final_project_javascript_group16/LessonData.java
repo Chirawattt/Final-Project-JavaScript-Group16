@@ -9,7 +9,7 @@ public class LessonData {
 
     static {
         // บทที่ 1
-        lessonData.put(1, new String[]{
+        lessonData.put(0, new String[]{
                 "บทที่ 1: ชนิดข้อมูลใน JavaScript",
                 "<span style='color:#F7DF1E'><b>JavaScript</b></span> เป็นภาษาที่รองรับชนิดข้อมูลที่หลากหลาย ซึ่งสามารถแบ่งออกเป็น <b>Primitive Types</b> และ <b>Reference Types</b> โดยแต่ละชนิดมีพฤติกรรมที่แตกต่างกัน.",
 
@@ -68,7 +68,7 @@ public class LessonData {
                         + "\t\t• <b>Array</b> เหมาะสำหรับเก็บข้อมูลที่เป็นลำดับ เช่น `[ 'red', 'blue', 'green' ]`.<br>"
         });
         // เพิ่มตัวอย่างโค้ดสำหรับบทที่ 1
-        lessonExamples.put(1, new String[]{
+        lessonExamples.put(0, new String[]{
                 "<span style='color:#555555'>// ตัวเลข (Number)</span> <br>let age = 25; <br>let pi = 3.14; <br>console.log(age, pi);",
                 "<span style='color:#555555'>// ข้อความ (String)</span> <br>let name = \"Alice\"; <br>let greeting = 'Hello, ' + name; <br>console.log(greeting);",
                 "<span style='color:#555555'>// ค่าความจริง (Boolean)</span> <br>let isStudent = true; <br>let hasLicense = false; <br>console.log(isStudent, hasLicense);",
@@ -77,7 +77,7 @@ public class LessonData {
                 "<span style='color:#555555'>// อ็อบเจกต์และอาร์เรย์</span> <br>let person = { name: 'John', age: 30 }; <br>let colors = ['red', 'blue', 'green']; <br>console.log(person.name, colors[0]);"
         });
         // Mockup Output ของแต่ละตัวอย่าง
-        lessonOutputs.put(1, new String[]{
+        lessonOutputs.put(0, new String[]{
                 "✅ ผลลัพธ์:\n 25 3.14",  // ตัวเลข
                 "✅ ผลลัพธ์:\n Hello, Alice",  // ข้อความ
                 "✅ ผลลัพธ์:\n true false",  // Boolean
@@ -87,7 +87,7 @@ public class LessonData {
         });
 
         // บทที่ 2
-        lessonData.put(2, new String[]{
+        lessonData.put(1, new String[]{
                 "บทที่ 2: ตัวแปรใน JavaScript",
                 "<span style='color:#F7DF1E'><b>ตัวแปร (Variables)</b></span> ใช้สำหรับเก็บข้อมูล เช่น <b>ตัวเลข</b>, <b>ข้อความ</b>, หรือ <b>ค่าความจริง</b>.",
 
@@ -124,7 +124,7 @@ public class LessonData {
                         + "• ✅ <b>Case-Sensitive (ตัวพิมพ์เล็ก-ใหญ่มีผล)</b> เช่น <b>`username` ≠ `UserName`</b><br>"
                         + "• ✅ <b>ใช้ `camelCase` ในการตั้งชื่อตัวแปร</b> เช่น <b>`let firstName = 'John';`</b><br>"
         });
-        lessonExamples.put(2, new String[]{
+        lessonExamples.put(1, new String[]{
                 "<span style='color:#555555'>// var สามารถใช้ก่อนประกาศได้ (Hoisting)</span> <br>console.log(x); <br>var x = 5; <br>console.log(x);",
                 "<span style='color:#555555'>// let ต้องประกาศก่อนใช้ มิฉะนั้นจะเกิด Error</span> <br>console.log(y); <br>let y = 10; <br>console.log(y);",
                 "<span style='color:#555555'>// const ต้องกำหนดค่าตอนประกาศ และเปลี่ยนค่าไม่ได้</span> <br>const z = 20; <br>console.log(z);",
@@ -132,7 +132,7 @@ public class LessonData {
                 "<span style='color:#555555'>// ❌ ตัวแปรที่ผิดกฎ (ขึ้นต้นด้วยตัวเลข)</span> <br>let 1user = 'Alice';",
                 "<span style='color:#555555'>// ❌ ตัวแปรที่ผิดกฎ (ใช้คำสงวนของ JavaScript)</span> <br>let function = 'test';"
         });
-        lessonOutputs.put(2, new String[]{
+        lessonOutputs.put(1, new String[]{
                 "✅ ผลลัพธ์:\nundefined\n5",  // Hoisting ของ var
                 "⚠️ ผลลัพธ์:\nError: Cannot access 'y' before initialization",  // let ไม่สามารถใช้ก่อนประกาศ
                 "✅ ผลลัพธ์:\n20",  // const เปลี่ยนค่าไม่ได้
@@ -142,7 +142,7 @@ public class LessonData {
         });
 
         // บทที่ 3
-        lessonData.put(3, new String[] {
+        lessonData.put(2, new String[] {
                 "บทที่ 3: ตัวดำเนินการใน JavaScript",
                 "<span style='color:#F7DF1E'><b>ตัวดำเนินการ (Operators)</b></span> ใช้สำหรับการคำนวณ การเปรียบเทียบ และการจัดการค่าต่าง ๆ ใน JavaScript",
 
@@ -198,7 +198,7 @@ public class LessonData {
 
                         + "<span style='color:#F7DF1E'><b>💡 Tips:</b></span> ใช้วงเล็บ `()` เพื่อกำหนดลำดับการทำงานให้ชัดเจน เช่น <code>(10 + 5) * 2</code> แทน <code>10 + 5 * 2</code> ที่ให้ผลลัพธ์ต่างกัน<br>"
         });
-        lessonExamples.put(3, new String[]{
+        lessonExamples.put(2, new String[]{
                 "<span style='color:#555555'>// การใช้ตัวดำเนินการทางคณิตศาสตร์</span> <br>let x = 10; <br>let y = 5; <br>console.log(x * y);",
                 "<span style='color:#555555'>// ตัวดำเนินการเปรียบเทียบ</span> <br>console.log(10 == '10'); <br>console.log(10 === '10');",
                 "<span style='color:#555555'>// ตัวดำเนินการตรรกะ</span> <br>console.log(true && false); <br>console.log(true || false);",
@@ -206,7 +206,7 @@ public class LessonData {
                 "<span style='color:#555555'>// ตัวดำเนินการระดับบิต</span> <br>console.log(5 & 1); <br>console.log(5 | 1);",
                 "<span style='color:#555555'>// ตัวดำเนินการสามเงื่อนไข</span> <br>let age = 18; <br>let status = (age >= 18) ? 'ผู้ใหญ่' : 'เด็ก'; <br>console.log(status);"
         });
-        lessonOutputs.put(3, new String[]{
+        lessonOutputs.put(2, new String[]{
                 "✅ ผลลัพธ์:\n50",  // ผลลัพธ์ของ `10 * 5`
                 "✅ ผลลัพธ์:\ntrue\nfalse",  // เปรียบเทียบ `==` และ `===`
                 "✅ ผลลัพธ์:\nfalse\ntrue",  // AND และ OR
@@ -216,7 +216,7 @@ public class LessonData {
         });
 
         // บทที่ 4
-        lessonData.put(4, new String[]{
+        lessonData.put(3, new String[]{
                 "บทที่ 4: คำสั่งควบคุมใน JavaScript",
                 "<span style='color:#F7DF1E'><b>คำสั่งควบคุม (Control Structures)</b></span> ใช้กำหนดลำดับการทำงานของโปรแกรม เช่น การเลือกเงื่อนไขและการวนซ้ำ",
 
@@ -266,7 +266,7 @@ public class LessonData {
 
                         + "<span style='color:#F7DF1E'><b>💡 Tips:</b></span> ใช้ `try...catch` ควบคู่กับ `throw` เพื่อสร้างข้อผิดพลาดเอง เช่น `throw new Error('เกิดข้อผิดพลาด')`<br>"
         });
-        lessonExamples.put(4, new String[]{
+        lessonExamples.put(3, new String[]{
                 "<span style='color:#555555'>// คำสั่ง if, else if, else</span> <br>let score = 85; <br>if (score >= 90) { <br> \t\tconsole.log('A'); <br>} else if (score >= 80) {<br> \t\tconsole.log('B');<br>} else {<br> \t\tconsole.log('C');<br>}",
                 "<span style='color:#555555'>// คำสั่ง switch</span> <br>let day = 3;<br>switch (day) {<br>  \t\tcase 1: console.log('วันจันทร์'); break;<br>  \t\tcase 2: console.log('วันอังคาร'); break;<br>  \t\tdefault: console.log('วันอื่นๆ');<br>}",
                 "<span style='color:#555555'>// คำสั่ง for</span> <br>for (let i = 1; i &lt;= 5; i++) {<br> \t\tconsole.log('รอบที่ ' + i);<br>}",
@@ -274,7 +274,7 @@ public class LessonData {
                 "<span style='color:#555555'>// คำสั่ง break และ continue</span> <br>for (let i = 1; i &lt;= 5; i++) {<br>  \t\tif (i == 3) break;<br>  \t\t\t\tconsole.log(i);<br>}",
                 "<span style='color:#555555'>// การจัดการข้อผิดพลาด</span> <br>try {<br>  \t\tlet a = 10 / 0;<br>  \t\tif (!isFinite(a)) throw new Error('หารด้วยศูนย์ไม่ได้');<br>} catch (error) {<br>  \t\tconsole.log(error.message);<br>}"
         });
-        lessonOutputs.put(4, new String[]{
+        lessonOutputs.put(3, new String[]{
                 "✅ ผลลัพธ์:\nB",  // เงื่อนไข if-else
                 "✅ ผลลัพธ์:\nวันอื่นๆ",  // switch-case
                 "✅ ผลลัพธ์:\nรอบที่ 1\nรอบที่ 2\nรอบที่ 3\nรอบที่ 4\nรอบที่ 5",  // for loop
@@ -284,7 +284,7 @@ public class LessonData {
         });
 
         // บทที่ 5
-        lessonData.put(5, new String[]{
+        lessonData.put(4, new String[]{
                 "บทที่ 5: ฟังก์ชันใน JavaScript",
                 "<span style='color:#F7DF1E'><b>ฟังก์ชัน (Function)</b></span> คือ กลุ่มของคำสั่งที่สามารถนำกลับมาใช้ซ้ำได้ ทำให้โค้ดเป็นระบบมากขึ้น และช่วยลดความซับซ้อนของโปรแกรม",
 
@@ -366,7 +366,7 @@ public class LessonData {
 
                         + "<span style='color:#F7DF1E'><b>💡 Tips:</b></span> ฟังก์ชันลูกศร (`=>`) ไม่มี `this` ของตัวเอง ค่าของ `this` จะถูกอ้างอิงจากบริบทที่อยู่ข้างนอกฟังก์ชัน<br>"
         });
-        lessonExamples.put(5, new String[]{
+        lessonExamples.put(4, new String[]{
                 "<span style='color:#555555'>// การประกาศและเรียกใช้ฟังก์ชัน</span> <br>function greet() {<br>  \t\tconsole.log('Hello!');<br>}<br>greet();",
                 "<span style='color:#555555'>// พารามิเตอร์และอาร์กิวเมนต์</span> <br>function add(a, b) {<br>  \t\treturn a + b;<br>}<br>console.log(add(3, 5));",
                 "<span style='color:#555555'>// ฟังก์ชันนิรนาม</span> <br>const sayHello = function() {<br>  \t\tconsole.log('Hi!');<br>};<br>sayHello();",
@@ -374,7 +374,7 @@ public class LessonData {
                 "<span style='color:#555555'>// ฟังก์ชันเรียกตัวเอง</span> <br>function factorial(n) {<br>  \t\tif (n === 1) return 1;<br>  \t\treturn n * factorial(n - 1);<br>}<br>console.log(factorial(5));",
                 "<span style='color:#555555'>// การใช้ this ในฟังก์ชัน</span> <br>const person = {<br>  \t\tname: 'John',<br>  \t\tgreet: function() {<br> \t\t\t\tconsole.log('Hello, ' + this.name);<br>  \t\t}<br>};<br>person.greet();"
         });
-        lessonOutputs.put(5, new String[]{
+        lessonOutputs.put(4, new String[]{
                 "✅ ผลลัพธ์:\nHello!",  // ฟังก์ชันพื้นฐาน
                 "✅ ผลลัพธ์:\n8",  // ฟังก์ชันที่มีพารามิเตอร์และ return
                 "✅ ผลลัพธ์:\nHi!",  // ฟังก์ชันนิรนาม

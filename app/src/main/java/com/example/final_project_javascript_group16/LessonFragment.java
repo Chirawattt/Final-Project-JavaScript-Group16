@@ -67,7 +67,6 @@ public class LessonFragment extends Fragment {
             SharedPreferences prefs = requireContext().getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
             prefs.edit()
                     .putBoolean("lesson_read_" + position, true)
-                    .putBoolean("ref_lesson_" + position, true) // 👈 สำคัญ!
                     .apply();
 
             Intent intent = new Intent(getActivity(), LessonDetailActivity.class);
@@ -115,10 +114,10 @@ public class LessonFragment extends Fragment {
 
     private boolean isAllLessonsCompleted() {
         SharedPreferences prefs = requireContext().getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
-        return prefs.getBoolean("ref_lesson_0", false) &&
-                prefs.getBoolean("ref_lesson_1", false) &&
-                prefs.getBoolean("ref_lesson_2", false) &&
-                prefs.getBoolean("ref_lesson_3", false) &&
-                prefs.getBoolean("ref_lesson_4", false);
+        return prefs.getBoolean("lesson_read_0", false) &&
+                prefs.getBoolean("lesson_read_1", false) &&
+                prefs.getBoolean("lesson_read_2", false) &&
+                prefs.getBoolean("lesson_read_3", false) &&
+                prefs.getBoolean("lesson_read_4", false);
     }
 }

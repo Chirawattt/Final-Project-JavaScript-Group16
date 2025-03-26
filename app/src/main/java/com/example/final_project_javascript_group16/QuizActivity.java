@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.lang.reflect.Array;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -25,7 +25,7 @@ public class QuizActivity extends AppCompatActivity {
     private Button nextButton, btnPreviousQuestion;
     private ProgressBar progressBar;
     private List<Question> questions;
-    private int currentIndex = 0;
+    private int currentIndex = 0; // เริ่มที่ข้อแรก
     private int score = 0;
     private int lessonNumber;
     private String lessonName;
@@ -38,7 +38,7 @@ public class QuizActivity extends AppCompatActivity {
         setContentView(R.layout.activity_quiz);
 
         // รับข้อมูลจาก Intent
-        lessonNumber = getIntent().getIntExtra("lessonNumber", 1);
+        lessonNumber = getIntent().getIntExtra("lessonNumber", 0);
         lessonName = getIntent().getStringExtra("lessonName");
 
         // ผูกกับ View
@@ -55,7 +55,7 @@ public class QuizActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.progress_bar);
 
         // ตั้งชื่อบท
-        lessonTitleText.setText("บทที่ " + lessonNumber + ": " + lessonName);
+        lessonTitleText.setText(lessonName);
 
         // โหลดคำถาม
         questions = QuestionBank.getQuestions(lessonNumber);
@@ -75,7 +75,6 @@ public class QuizActivity extends AppCompatActivity {
         nextButton.setOnClickListener(v -> {
             checkAnswer();
             currentIndex++;
-
             if (currentIndex < questions.size()) {
                 showQuestion();
             } else {
@@ -105,7 +104,7 @@ public class QuizActivity extends AppCompatActivity {
         optionD.setText("D. " + opts[3]);
 
         questionNumberText.setText("ข้อที่ " + (currentIndex + 1) + " / " + questions.size());
-        progressBar.setProgress((int) (((currentIndex + 1.0) / questions.size()) * 100));
+        progressBar.setProgress((int) (((currentIndex + 1.0) / questions.size()) * 100), true);
 
         optionGroup.clearCheck();
         nextButton.setVisibility(View.GONE);
@@ -132,7 +131,7 @@ public class QuizActivity extends AppCompatActivity {
                 answeredCorrectly[currentIndex] = true;
             }
         }else {
-            // ถ้าเคยตอบถูกแล้วกลับมาตอบผิดก -> ลดคะแนน และ unflag
+            // ตอบผิด (หรือเปลี่ยนจากถูกเป็นผิด)
             if (answeredCorrectly[currentIndex]) {
                 score--;
                 answeredCorrectly[currentIndex] = false;
@@ -145,8 +144,9 @@ public class QuizActivity extends AppCompatActivity {
         int oldScore = prefs.getInt("score_lesson_" + lessonNumber, 0);
         if (score > oldScore) {
             prefs.edit().putInt("score_lesson_" + lessonNumber, score).apply();
+            prefs.edit().putBoolean("just_finished_lesson_" + lessonNumber, true).apply();
         }
-        prefs.edit().putBoolean("just_finished_lesson_" + lessonNumber, true).apply();
+
         showScoreDialog(score);
     }
 

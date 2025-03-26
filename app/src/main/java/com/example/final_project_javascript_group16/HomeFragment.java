@@ -26,6 +26,8 @@ public class HomeFragment extends Fragment {
         Button btnLesson = view.findViewById(R.id.btn_lesson);
         Button btnQuiz = view.findViewById(R.id.btn_quiz);
         Button btnPractice = view.findViewById(R.id.btn_practice);
+        TextView progressText = view.findViewById(R.id.overall_progress);
+        ProgressBar progressBar = view.findViewById(R.id.overall_progress_bar);
         TextView tipText = view.findViewById(R.id.tip_text);
 
         // Progress Bar
@@ -33,12 +35,8 @@ public class HomeFragment extends Fragment {
         int lessonCount = 5;
         int lessonsCompleted = getLessonsCompleted(lessonPrefs, lessonCount);
 
-        TextView progressText = view.findViewById(R.id.overall_progress);
-        ProgressBar progressBar = view.findViewById(R.id.overall_progress_bar);
-
         progressText.setText("ความคืบหน้า: " + lessonsCompleted + " / " + lessonCount + " บท");
         progressBar.setProgress((int)((lessonsCompleted / (float) lessonCount) * 100));
-
 
         // สุ่ม Tip
         String[] tips = {

@@ -1,9 +1,7 @@
 package com.example.final_project_javascript_group16;
 
 import android.os.Bundle;
-import android.view.MenuItem;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
@@ -36,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
             // ป้องกันการ โหลด Fragment เดิมซ้ำโดยไม่จำเป็น หากผู้ใช้กด Tab เดิมซ้ำๆ
             Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
-            if (currentFragment == null || !currentFragment.getClass().equals(selectedFragment.getClass())) {
+            if (!currentFragment.getClass().equals(selectedFragment.getClass())) {
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.fragment_container, selectedFragment)
                         .commit();
